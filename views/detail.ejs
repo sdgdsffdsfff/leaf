@@ -6,6 +6,7 @@
   </head>
   <body>
     <header>
+        <a href="/" class="back">返回</a>
         <h1><%=product%></h1>
         <span class="version"><%=version%></span>
         <ul class="versionList">
@@ -22,5 +23,15 @@
             <li>视觉稿地址： <input type="text" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
         </ul>
     </div>
+
+    <div class="display">
+        <div class="tab">
+            <div class="tab_prd">PRD</div>
+            <div class="tab_prototype">交互</div>
+            <div class="tab_visual">视觉</div>
+        </div>
+        <iframe src="" frameborder="0"></iframe>
+    </div>
+
   </body>
 </html>
