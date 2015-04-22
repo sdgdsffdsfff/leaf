@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+        <h1><%=product%></h1>
+        <span class="version"><%=version%></span>
+        <ul class="versionList">
+            <% versions.forEach(function(el){%>
+                <li><%=el.name%><%=el.date%></li>
+            <%})%>
+        </ul>
+    </header>
+    
+    <div class="address">
+        <ul>
+            <li>PRD地址： <input type="text" value="<%=prd.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prd.time%></span> </li>
+            <li>交互地址： <input type="text" value="<%=prototype.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prototype.time%></span> </li>
+            <li>视觉稿地址： <input type="text" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
+        </ul>
+    </div>
+  </body>
+</html>

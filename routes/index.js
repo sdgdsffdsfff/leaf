@@ -13,7 +13,31 @@ router.get('/:project/:version?', function(req, res, next) {
     if(version === 'prd' || version === 'prototype' || version === 'visual'){
         next();
     }
-    res.render('index', { title: 'project' });
+    var tmpData = {
+        "title" : "测死项目",
+        "product" : "测试",
+        "version" : "v0.1",
+        "versions" : [{
+            "name" : "v0.1",
+            "date" : "xxxx"
+        },{
+            "name" : "v0.2",
+            "date" : "xxxxx"
+        }],
+        "prd" : {
+            "mapping" : "http://xxxxxx",
+            "time" : "xxxx"
+        },
+        "prototype" : {
+            "mapping" : "http://xxxxx",
+            "time" : "xxxxx"
+        },
+        "visual" : {
+            "mapping" : "http://xxxxxx",
+            "time" : "xxxxx"
+        }
+    }
+    res.render('detail', tmpData);
 });
 
 
