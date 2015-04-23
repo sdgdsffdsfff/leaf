@@ -40,9 +40,9 @@ function mixPath(value) {
 
 
 var showUrl = {
-    "prd": '/test/首页精准化/1/prd',
-    "prototype": '/test/首页精准化/1/prototype',
-    "visual": '/test/首页精准化/1/visual'
+    "prd": '/首页精准化/1/prd',
+    "prototype": '/首页精准化/1/prototype',
+    "visual": '/首页精准化/1/visual'
 };
 
 

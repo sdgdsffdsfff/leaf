@@ -4,8 +4,8 @@ var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
 
-var projectRootPath = path.resolve(__dirname, '../test/projects');
-var srcRootPath = path.resolve(__dirname, '../test/window');
+var projectRootPath = path.resolve(__dirname, '../projects');
+var srcRootPath = path.resolve(__dirname, '../window');
 
 
 
