@@ -12,13 +12,14 @@ router.get('/', function(req, res, next) {
 // get project page
 router.get('/:project/:version?', function(req, res, next) {
     var version = req.params.version;
+    var project = req.params.project;
     if(version === 'prd' || version === 'prototype' || version === 'visual'){
         next();
     }
     var tmpData = {
-        "title" : "测试项目",
-        "product" : "测试",
-        "version" : "v0.1",
+        "title" : project,
+        "product" : project,
+        "version" : version,
         "versions" : [{
             "name" : "v0.1",
             "date" : "xxxx"

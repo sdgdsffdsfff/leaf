@@ -2,11 +2,11 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/detail.css' />
   </head>
   <body>
     <header>
-        <a href="/" class="back">返回</a>
+        <!-- <a href="/" class="back">返回</a> -->
         <h1><%=product%></h1>
         <span class="version"><%=version%></span>
         <ul class="versionList">
@@ -18,15 +18,15 @@
     
     <div class="address">
         <ul>
-            <li>PRD地址： <input type="text" value="<%=prd.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prd.time%></span> </li>
-            <li>交互地址： <input type="text" value="<%=prototype.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prototype.time%></span> </li>
-            <li>视觉稿地址： <input type="text" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
+            <li><b>PRD地址：</b><input type="text" value="<%=prd.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prd.time%></span> </li>
+            <li><b>交互地址：</b><input type="text" value="<%=prototype.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prototype.time%></span> </li>
+            <li><b>视觉稿地址：</b><input type="text" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
         </ul>
     </div>
 
     <div class="display">
         <div class="tab">
-            <button class="tab_prd" data-type="prd">PRD</button>
+            <button class="tab_prd" data-type="prd" >PRD</button>
             <button class="tab_prototype" data-type="prototype">交互</button>
             <button class="tab_visual" data-type="visual">视觉</button>
         </div>
