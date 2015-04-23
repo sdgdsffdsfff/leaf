@@ -31,8 +31,26 @@ $address.on('click', 'button', function() {
     });
 });
 
-function mixPath(value){
+function mixPath(value) {
     var mixValue = value;
-    mixValue = mixValue.replace(/\\/g,'/');
+    mixValue = mixValue.replace(/\\/g, '/');
     return mixValue;
 }
+
+
+
+var showUrl = {
+    "prd": '/test/首页精准化/1/prd',
+    "prototype": '/test/首页精准化/1/prototype',
+    "visual": '/test/首页精准化/1/visual'
+};
+
+
+var $tab = $('.tab');
+var $showIframe = $('#showIframe');
+
+$tab.on('click', 'button', function() {
+    var $me = $(this);
+    var type = $me.data('type');
+    $showIframe.attr('src', showUrl[type]);
+});
