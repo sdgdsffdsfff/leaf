@@ -16,7 +16,7 @@ router.get('/:project/:version?', function(req, res, next) {
         next();
     }
     var tmpData = {
-        "title" : "测死项目",
+        "title" : "测试项目",
         "product" : "测试",
         "version" : "v0.1",
         "versions" : [{
