@@ -58,6 +58,9 @@ router.get('/:project/:version?/prototype', function(req, res, next) {
     var host = req.headers.host;
     var _path = path.join(__dirname,'../projects/' + project + '/');
 
+
+
+    // TODO : 这里的version应该由数据库提供
     if(!version){
         var urls = fs.readdirSync(_path);
         urls = urls.filter(function(el){
@@ -86,8 +89,37 @@ router.get('/:project/:version?/prototype', function(req, res, next) {
 
 // get visual page
 router.get('/:project/:version?/visual', function(req, res, next) {
-  res.render('index', { title: 'visual' });
+
+  var version = req.params.version;
+  var project = req.params.project;
+  var host = req.headers.host;
+
+  var _path = path.join(__dirname,'../projects/' + project  +'/' + version + '/visual/');
+
+
+  fs.exists(_path,function(exists){
+    if(!exists){res.end('ouch!!!');return;}
+    var images =  fs.readdirSync(_path);
+    images = images.filter(function(el){
+        var extname = path.extname(el);
+        return ( extname === '.png' || extname === '.jpg' || extname === '.jpeg' || extname === '.gif')
+    });
+    
+    images = images.map(function(el){
+        return 'http://'+host + '/projects/' + project + '/' + version + '/visual/' + el;
+    });
+
+    var data = {
+        title : "visual",
+        images : images
+    }
+
+    res.render('visual', data);
+
+  })
 });
+
+
 
 
 module.exports = router;
