@@ -12,7 +12,7 @@ var srcRootPath = path.resolve(__dirname, '../test/window');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    
+
 });
 
 
@@ -24,12 +24,40 @@ router.post('/', function(req, res, next) {
     var type = req.body.type;
     var srcPath = req.body.srcPath;
 
-    //srcPath = findPath(srcPath);
+
+    function findPath(srcPath) {
+        var realPath = srcPath;
+        if (srcPath.split('CrossShare/').length > 1) {
+            realPath = srcPath.split('CrossShare/')[1];
+        }
+        return realPath;
+    }
+
+
+
+    srcPath = findPath(srcPath);
+
+    // console.log('源目录=', srcPath);
+
+
 
     //TODO
-    srcPath = path.join(srcRootPath, '首页精准化v1.2', '【视觉】首页精准化v1.2', path.sep)
+    srcPath = path.join(srcRootPath, srcPath)
 
 
+    if (!fs.existsSync(srcPath)) {
+        res.send('error');
+        return;
+    }
+
+
+    var file = fs.statSync(srcPath);
+
+    if (file.isDirectory()) {
+        srcPath = path.join(srcPath, path.sep);
+    }
+
+    // console.log('处理后=', srcPath)
     //copy
     var projectPath = path.join(projectRootPath, projectName, version);
 
@@ -37,33 +65,34 @@ router.post('/', function(req, res, next) {
 
     if (!isExists) {
         fs.mkdirSync(projectPath);
+        fs.mkdirSync(path.join(projectPath, path.sep, 'prd'));
+        fs.mkdirSync(path.join(projectPath, path.sep, 'prototype'));
+        fs.mkdirSync(path.join(projectPath, path.sep, 'visual'));
     }
 
 
     var cmdStr = 'cp -R ' + srcPath + ' ' + projectPath + path.sep + type + path.sep;
 
-    console.log(cmdStr);
+    // console.log('命令=', cmdStr);
 
     exec(cmdStr, function(err, stdout, stderr) {
         if (err) {
             console.error(stderr);
+            res.send('error');
         } else {
             res.send('同步成功！');
         }
     });
 
 
-    
+
 });
 
 
 
 
 
-function findPath(srcPath) {
-    var realPath = srcPath;
-    return realPath;
-}
+
 
 
 //copy('首页精准化', 1, 'visual', path.join(srcRootPath, '首页精准化v1.2', '【视觉】首页精准化v1.2', path.sep));

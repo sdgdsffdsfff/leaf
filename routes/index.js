@@ -27,15 +27,15 @@ router.get('/:project/:version?', function(req, res, next) {
             "date" : "xxxxx"
         }],
         "prd" : {
-            "mapping" : "http://xxxxxx",
+            "mapping" : "\\\\192.168.8.8\\CrossShare\\首页精准化v1.2\\【PRD】首页精准化v1.2.docx",
             "time" : "xxxx"
         },
         "prototype" : {
-            "mapping" : "http://xxxxx",
+            "mapping" : "smb://192.168.8.8/CrossShare/首页精准化v1.2/【交互】首页精准化v1.2",
             "time" : "xxxxx"
         },
         "visual" : {
-            "mapping" : "http://xxxxxx",
+            "mapping" : "smb://192.168.8.8/CrossShare/首页精准化v1.2/【视觉】首页精准化v1.2",
             "time" : "xxxxx"
         }
     }
