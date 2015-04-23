@@ -18,9 +18,9 @@
     
     <div class="address">
         <ul>
-            <li>PRD地址： <input type="text" value="<%=prd.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prd.time%></span> </li>
-            <li>交互地址： <input type="text" value="<%=prototype.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prototype.time%></span> </li>
-            <li>视觉稿地址： <input type="text" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
+            <li>PRD地址： <input data-type="prd" type="text" value="<%=prd.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prd.time%></span> </li>
+            <li>交互地址： <input type="text" data-type="prototype" value="<%=prototype.mapping%>">  <button>更新</button> <span>上次更新时间：<%=prototype.time%></span> </li>
+            <li>视觉稿地址： <input type="text" data-type="visual" value="<%=visual.mapping%>">  <button>更新</button> <span>上次更新时间：<%=visual.time%></span> </li>
         </ul>
     </div>
 
@@ -32,6 +32,7 @@
         </div>
         <iframe src="" frameborder="0"></iframe>
     </div>
-
+    <script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>
+    <script src="/javascripts/detail.js"></script>
   </body>
 </html>
