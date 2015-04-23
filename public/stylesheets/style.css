@@ -6,3 +6,26 @@ body {
 a {
   color: #00B7FF;
 }
+.tab{
+      border: 1px solid;
+}
+
+.tab_prd{
+  display: inline-table;
+  width: 33%;
+}
+
+.tab_prototype{
+  display: inline-table;
+  width: 33%;
+}
+
+.tab_visual{
+  display: inline-table;
+  width: 33%;
+}
+
+iframe{
+    width: 100%;
+    height: 800px;
+}

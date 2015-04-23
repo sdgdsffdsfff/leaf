@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var copy = require('./routes/copy');
 
 var fs = require('fs');
 var path = require('path');
@@ -27,8 +28,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/projects", express.static(__dirname + "/projects"));
 
+
 app.use('/', routes);
 app.use('/users', users);
+app.use('/copy', copy);
 
 // judge projects is exist . if not mkdir projects folder
 fs.exists(path.join(__dirname,'/projects'),function(exists){
