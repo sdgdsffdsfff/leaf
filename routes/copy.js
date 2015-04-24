@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
         var file = fs.statSync(srcPath);
 
         if (file.isDirectory()) {
-            srcPath = path.join(srcPath, path.sep);
+            srcPath = path.join(srcPath, path.sep,'*');
         }
 
         // console.log('处理后=', srcPath)
