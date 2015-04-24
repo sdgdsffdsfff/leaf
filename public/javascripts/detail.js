@@ -55,7 +55,7 @@ var showUrl = {
 var $tab = $('.tab ');
 var $showIframe = $('#showIframe');
 
-$tab.on('click', 'button', function() {
+$tab.on('click', 'a', function() {
     var $me = $(this);
     var type = $me.data('type');
     $showIframe.attr('src', showUrl[type]);

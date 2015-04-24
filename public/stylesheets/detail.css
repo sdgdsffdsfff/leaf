@@ -9,6 +9,10 @@ li{
 
 a {
   color: #00B7FF;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 button{
