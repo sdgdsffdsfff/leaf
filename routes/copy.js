@@ -71,6 +71,10 @@ router.post('/', function(req, res, next) {
             fs.mkdirSync(path.join(projectPath, path.sep, 'visual'));
         }
 
+        if(!fs.existsSync(path.join(projectPath, path.sep, 'prd'))){
+            fs.mkdirSync(path.join(projectPath, path.sep, 'prd'));
+        }
+
 
         var cmdStr = 'cp -R ' + srcPath + ' ' + projectPath + path.sep + type + path.sep;
 

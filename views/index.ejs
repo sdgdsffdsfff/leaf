@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <% if (title === 'versions') { %>
+            <h2><%= project %></h2>
+        <% } %>
+        <ul>
+            <% if (title === 'projects') { %>
+                <% projects.forEach(function(el){%>
+                    <li><a href="/<%=el%>"><%=el%></a></li>
+                <%})%>
+                <% } %>
+            <% if (title === 'versions') { %>
+                <% versions.forEach(function(el){%>
+                    <li><a href="/<%= project %>/<%=el%>"><%=el%></a></li>
+                <%})%>
+            <% } %>
+        </ul>
+    </body>
 </html>

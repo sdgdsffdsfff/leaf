@@ -7,8 +7,8 @@
   <body>
     <header>
         <!-- <a href="/" class="back">返回</a> -->
-        <h1><%=product%></h1>
-        <span class="version"><%=version%></span>
+        <h1 id="showProject"><%=product%></h1>
+        <span class="version" id="showVersion"><%=version%></span>
         <ul class="versionList">
             <% versions.forEach(function(el){%>
                 <li><%=el.name%><%=el.date%></li>

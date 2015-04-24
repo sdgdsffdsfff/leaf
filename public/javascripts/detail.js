@@ -1,5 +1,9 @@
 var $address = $('.address');
 
+
+var showProject = $('#showProject').html();
+var showVersion = $('#showVersion').html();
+
 $address.on('click', 'button', function() {
     var $me = $(this);
 
@@ -13,11 +17,13 @@ $address.on('click', 'button', function() {
 
     //TODO test
     data = {
-        projectName: '首页精准化',
-        version: '1',
+        projectName: showProject,
+        version: showVersion,
         type: '',
         srcPath: ''
     };
+
+
 
     data.type = $me.prev('input').data('type') || 'prd';
     data.srcPath = mixPath($me.prev('input').val());
@@ -40,13 +46,13 @@ function mixPath(value) {
 
 
 var showUrl = {
-    "prd": '/首页精准化/1/prd',
-    "prototype": '/首页精准化/1/prototype',
-    "visual": '/首页精准化/1/visual'
+    "prd": '/' + showProject + '/' + showVersion + '/prd',
+    "prototype": '/' + showProject + '/' + showVersion + '/prototype',
+    "visual": '/' + showProject + '/' + showVersion + '/visual'
 };
 
 
-var $tab = $('.tab');
+var $tab = $('.tab ');
 var $showIframe = $('#showIframe');
 
 $tab.on('click', 'button', function() {

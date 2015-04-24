@@ -3,14 +3,43 @@ var router = express.Router();
 
 var fs = require('fs');
 var path = require('path');
+var projectRootPath = path.resolve(__dirname, '../projects');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Leaf' });
+
+
+    var projects =  fs.readdirSync(projectRootPath);
+    projects = projects.filter(function(el) {
+        var stats = fs.statSync(path.join(projectRootPath,el));
+        return stats.isDirectory();
+    });
+
+  res.render('index', { title: 'projects',projects: projects});
 });
 
+
 // get project page
-router.get('/:project/:version?', function(req, res, next) {
+router.get('/:project', function(req, res, next) {
+    var project = req.params.project;
+
+    var versions =  fs.readdirSync(path.join(projectRootPath,project));
+    versions = versions.filter(function(el) {
+        var stats = fs.statSync(path.join(projectRootPath,project,el));
+        return stats.isDirectory();
+    });
+
+    res.render('index', {
+        title: 'versions',
+        project:project,
+        versions:versions
+    });
+});
+
+
+
+// get project page
+router.get('/:project/:version', function(req, res, next) {
     var version = req.params.version;
     var project = req.params.project;
     if(version === 'prd' || version === 'prototype' || version === 'visual'){
@@ -40,6 +69,38 @@ router.get('/:project/:version?', function(req, res, next) {
             "time" : "xxxxx"
         }
     }
+
+    //TODO
+    //测试数据
+    if (project === '商品详情页') {
+        tmpData = {
+            "title": project,
+            "product": project,
+            "version": version,
+            "versions": [{
+                "name": "v0.1",
+                "date": "xxxx"
+            }, {
+                "name": "v0.2",
+                "date": "xxxxx"
+            }],
+            "prd": {
+                "mapping": "\\\\192.168.8.8\\CrossShare\\商品详情页\\【PRD】无线商详页需求文档.docx",
+                "time": "xxxx"
+            },
+            "prototype": {
+                "mapping": "smb://192.168.8.8/CrossShare/商品详情页/商详交互",
+                "time": "xxxxx"
+            },
+            "visual": {
+                "mapping": "smb://192.168.8.8/CrossShare/商品详情页/商详视觉",
+                "time": "xxxxx"
+            }
+        }
+    }
+
+
+
     res.render('detail', tmpData);
 });
 
