@@ -56,8 +56,18 @@ var showUrl = {
 };
 
 
+
 var $tab = $('.tab ');
 var $showIframe = $('#showIframe');
+
+if(window.location.hash) {
+    var _hash = window.location.hash;
+
+    if(_hash==='#prd' || _hash === '#prototype' || _hash === '#visual'){
+        _hash = _hash.substr(1);
+        $showIframe.attr('src', showUrl[_hash]);
+    }
+} 
 
 $tab.on('click', 'a', function() {
     var $me = $(this);
