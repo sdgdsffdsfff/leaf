@@ -9,7 +9,8 @@
   <div class="imgCon">
     <%images.forEach(function(el){%>
       <div class="imgBox">
-        <img src="<%=el%>" alt="">
+        <img src="<%=el.src%>" alt="">
+        <div class="title"><%=el.name%></div>
       </div>
     <%})%>
   </div>

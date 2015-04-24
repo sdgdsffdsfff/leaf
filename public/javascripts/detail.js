@@ -11,8 +11,6 @@ $('iframe').css({
     'height' : $(window).height() - $('.display .tab').height() - 10
 })
 
-
-
 $address.on('click', 'button', function() {
     var $me = $(this);
 
@@ -33,7 +31,6 @@ $address.on('click', 'button', function() {
     };
 
 
-
     data.type = $me.prev('input').data('type') || 'prd';
     data.srcPath = mixPath($me.prev('input').val());
 
@@ -52,8 +49,6 @@ function mixPath(value) {
     return mixValue;
 }
 
-
-
 var showUrl = {
     "prd": '/' + showProject + '/' + showVersion + '/prd',
     "prototype": '/' + showProject + '/' + showVersion + '/prototype',
@@ -61,8 +56,18 @@ var showUrl = {
 };
 
 
+
 var $tab = $('.tab ');
 var $showIframe = $('#showIframe');
+
+if(window.location.hash) {
+    var _hash = window.location.hash;
+
+    if(_hash==='#prd' || _hash === '#prototype' || _hash === '#visual'){
+        _hash = _hash.substr(1);
+        $showIframe.attr('src', showUrl[_hash]);
+    }
+} 
 
 $tab.on('click', 'a', function() {
     var $me = $(this);
