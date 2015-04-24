@@ -61,6 +61,10 @@ header{
   line-height: 100px;
   padding-left: 35px;
   color: #555;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 header h1{
