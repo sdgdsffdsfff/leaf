@@ -6,7 +6,13 @@
     </head>
     <body>
         <% if (title === 'versions') { %>
-            <h2><%= project %></h2>
+            <h2 id="projectName"><%= project %></h2>
+            <input type="text">
+            <button class="addVersion">添加版本</button>
+        <% } %>
+        <% if (title === 'projects') { %>
+            <input type="text">
+            <button class="addProject">添加项目</button>
         <% } %>
         <ul>
             <% if (title === 'projects') { %>
@@ -20,5 +26,7 @@
                 <%})%>
             <% } %>
         </ul>
+    <script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>
+    <script src="/javascripts/index.js"></script>
     </body>
 </html>

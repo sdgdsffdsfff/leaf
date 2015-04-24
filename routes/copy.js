@@ -66,12 +66,12 @@ router.post('/', function(req, res, next) {
 
         if (!isExists) {
             fs.mkdirSync(projectPath);
-            fs.mkdirSync(path.join(projectPath, path.sep, 'prd'));
-            fs.mkdirSync(path.join(projectPath, path.sep, 'prototype'));
-            fs.mkdirSync(path.join(projectPath, path.sep, 'visual'));
+            fs.mkdirSync(path.join(projectPath, 'prd'));
+            fs.mkdirSync(path.join(projectPath, 'prototype'));
+            fs.mkdirSync(path.join(projectPath, 'visual'));
         }
 
-        if(!fs.existsSync(path.join(projectPath, path.sep, 'prd'))){
+        if (!fs.existsSync(path.join(projectPath, path.sep, 'prd'))) {
             fs.mkdirSync(path.join(projectPath, path.sep, 'prd'));
         }
 

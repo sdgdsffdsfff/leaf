@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var copy = require('./routes/copy');
+var addProject = require('./routes/addProject');
+var addVersion = require('./routes/addVersion');
 
 var fs = require('fs');
 var path = require('path');
@@ -32,6 +34,8 @@ app.use("/projects", express.static(__dirname + "/projects"));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/copy', copy);
+app.use('/addProject', addProject);
+app.use('/addVersion', addVersion);
 
 // judge projects is exist . if not mkdir projects folder
 fs.exists(path.join(__dirname,'/projects'),function(exists){
