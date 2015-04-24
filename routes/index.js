@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var exec = require('child_process').exec;
 var fs = require('fs');
 var path = require('path');
 var projectRootPath = path.resolve(__dirname, '../projects');
@@ -106,11 +106,43 @@ router.get('/:project/:version', function(req, res, next) {
 
 
 // get prd page
-router.get('/:project/:version?/prd', function(req, res, next) {
-  var version = req.params.version;
-  var project = req.params.project;
-  if(!project){return;}
-  res.render('index', { title: 'prd' });
+router.get('/:project/:version/prd', function(req, res, next) {
+    var version = req.params.version;
+    var project = req.params.project;
+
+
+    var paths =  fs.readdirSync(path.join(projectRootPath,project,version,'prd'));
+    paths = paths.filter(function(el) {
+        var stats = fs.statSync(path.join(projectRootPath,project,version,'prd',el));
+        return stats.isFile();
+    });
+
+    paths.forEach(function(i) {
+        var cmdStr = 'unoconv -f html -o ' + path.join(projectRootPath, project, version, 'prd', 'tmp', 'tmp.html') + ' ' + path.join(projectRootPath, project, version, 'prd', i);
+
+        console.log('命令=', cmdStr);
+
+        exec(cmdStr, function(err, stdout, stderr) {
+            if (err) {
+                res.set('Content-Type', 'text/html');
+                res.send(stderr);
+            } else {
+                var htmls =  fs.readdirSync(path.join(projectRootPath,project,version,'prd','tmp'));
+                htmls = htmls.filter(function(el) {
+                    var flag = true;
+                    var stats = fs.statSync(path.join(projectRootPath,project,version,'prd','tmp',el));
+                    if(stats.isFile()){
+                        flag = path.extname(el) === '.html' ? true:false;
+                    }
+                    return flag;
+                });
+
+                var htmlFile = fs.readFileSync(path.join(projectRootPath,project,version,'prd','tmp',htmls[0]));
+                res.set('Content-Type', 'text/html');
+                res.send(htmlFile);
+            }
+        });
+    });
 });
 
 // get prototype page
