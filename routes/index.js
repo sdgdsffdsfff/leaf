@@ -99,8 +99,6 @@ router.get('/:project/:version', function(req, res, next) {
         }
     }
 
-
-
     res.render('detail', tmpData);
 });
 
@@ -119,8 +117,6 @@ router.get('/:project/:version?/prototype', function(req, res, next) {
     var project = req.params.project;
     var host = req.headers.host;
     var _path = path.join(__dirname,'../projects/' + project + '/');
-
-
 
     // TODO : 这里的version应该由数据库提供
     if(!version){
@@ -168,7 +164,10 @@ router.get('/:project/:version?/visual', function(req, res, next) {
     });
     
     images = images.map(function(el){
-        return 'http://'+host + '/projects/' + project + '/' + version + '/visual/' + el;
+        return {
+            'src' :  'http://'+host + '/projects/' + project + '/' + version + '/visual/' + el,
+            'name' : el
+        }
     });
 
     var data = {
