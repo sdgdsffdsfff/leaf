@@ -17,7 +17,7 @@
         <ul>
             <% if (title === 'projects') { %>
                 <% projects.forEach(function(el){%>
-                    <li><a href="/<%=el%>"><%=el%></a></li>
+                    <li><a href="/<%=el.name%>"><%=el.name%></a></li>
                 <%})%>
                 <% } %>
             <% if (title === 'versions') { %>

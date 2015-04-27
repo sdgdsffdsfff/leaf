@@ -77,4 +77,9 @@ app.use(function(err, req, res, next) {
 });
 
 
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://leaf:leaf@127.0.0.1:27017/leaf');
+
+
 module.exports = app;

@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var router = express.Router();
-
+var Project = require('../db/project');
 
 var projectRootPath = path.resolve(__dirname, '../projects');
 var srcRootPath = path.resolve(__dirname, '../window');
@@ -25,7 +25,22 @@ router.post('/', function(req, res, next) {
         fs.mkdirSync(projectPath);
     }
 
-    res.end('200');
+
+    var project = new Project({
+        name: projectName,
+        description: projectPath
+    });
+    project.save(function(err, project) {
+        if (err) {
+            res.status('404');
+            res.end();
+        } else {
+            res.status('200');
+            res.end();
+        }
+    });
+
+
 
 });
 

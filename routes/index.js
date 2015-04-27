@@ -4,18 +4,25 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 var path = require('path');
 var projectRootPath = path.resolve(__dirname, '../projects');
+var Project = require('../db/project');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 
-    var projects =  fs.readdirSync(projectRootPath);
-    projects = projects.filter(function(el) {
-        var stats = fs.statSync(path.join(projectRootPath,el));
-        return stats.isDirectory();
+    //数据库查询
+    Project.find({}, function(err, projects) {
+        if (err) {
+            projects = [];
+        }
+        res.render('index', {
+            title: 'projects',
+            projects: projects
+        });
+
     });
 
-  res.render('index', { title: 'projects',projects: projects});
+
 });
 
 
