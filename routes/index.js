@@ -5,6 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var projectRootPath = path.resolve(__dirname, '../projects');
 var Project = require('../db/project');
+var Version = require('../db/version');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,7 +29,7 @@ router.get('/', function(req, res, next) {
 router.get('/:project', function(req, res, next) {
     var project = req.params.project;
 
-    if('favicon.ico' === project){
+    if ('favicon.ico' === project) {
         return;
     }
 
@@ -36,7 +37,7 @@ router.get('/:project', function(req, res, next) {
     Project.findVersions(project, function(err, versions) {
         if (err) {
             versions = [];
-        }else{
+        } else {
             versions = versions.versions;
         }
 
@@ -57,64 +58,26 @@ router.get('/:project', function(req, res, next) {
 router.get('/:project/:version', function(req, res, next) {
     var version = req.params.version;
     var project = req.params.project;
-    if (version === 'prd' || version === 'prototype' || version === 'visual') {
-        next();
-    }
-    var tmpData = {
-        "title": project,
-        "product": project,
-        "version": version,
-        "versions": [{
-            "name": "v0.1",
-            "date": "xxxx"
-        }, {
-            "name": "v0.2",
-            "date": "xxxxx"
-        }],
-        "prd": {
-            "mapping": "\\\\192.168.8.8\\CrossShare\\首页精准化v1.2\\【PRD】首页精准化v1.2.docx",
-            "time": "xxxx"
-        },
-        "prototype": {
-            "mapping": "smb://192.168.8.8/CrossShare/首页精准化v1.2/【交互】首页精准化v1.2",
-            "time": "xxxxx"
-        },
-        "visual": {
-            "mapping": "smb://192.168.8.8/CrossShare/首页精准化v1.2/【视觉】首页精准化v1.2",
-            "time": "xxxxx"
-        }
-    }
+    var tmpData = {};
 
-    //TODO
-    //测试数据
-    if (project === '商品详情页') {
-        tmpData = {
-            "title": project,
-            "product": project,
-            "version": version,
-            "versions": [{
-                "name": "v0.1",
-                "date": "xxxx"
-            }, {
-                "name": "v0.2",
-                "date": "xxxxx"
-            }],
-            "prd": {
-                "mapping": "\\\\192.168.8.8\\CrossShare\\商品详情页\\【PRD】无线商详页需求文档.docx",
-                "time": "xxxx"
-            },
-            "prototype": {
-                "mapping": "smb://192.168.8.8/CrossShare/商品详情页/商详交互",
-                "time": "xxxxx"
-            },
-            "visual": {
-                "mapping": "smb://192.168.8.8/CrossShare/商品详情页/商详视觉",
-                "time": "xxxxx"
-            }
-        }
-    }
 
-    res.render('detail', tmpData);
+    //数据库查询
+    Project.findVersions(project, function(err, ver) {
+        if (err) {
+            ver = {};
+        } else {
+            ver = ver || {}
+        }
+
+        // console.log(ver);
+
+        ver.title = '版本详情页';
+        ver.version = version;
+
+        res.render('detail', ver);
+
+    });
+
 });
 
 

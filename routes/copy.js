@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
+var Version = require('../db/version');
 
 var projectRootPath = path.resolve(__dirname, '../projects');
 var srcRootPath = path.resolve(__dirname, '../window');
@@ -15,6 +16,22 @@ router.get('/', function(req, res, next) {
 
 });
 
+
+function update(type, version, newContent, cb) {
+
+    switch (type) {
+        case 'prd':
+            Version.updatePrd(version, newContent, cb);
+            break;
+        case 'prototype':
+            Version.updatePrototype(version, newContent, cb);
+            break;
+        case 'visual':
+            Version.updateVisual(version, newContent, cb);
+            break;
+    }
+
+}
 
 
 /* GET users listing. */
@@ -55,7 +72,7 @@ router.post('/', function(req, res, next) {
         var file = fs.statSync(srcPath);
 
         if (file.isDirectory()) {
-            srcPath = path.join(srcPath, path.sep,'*');
+            srcPath = path.join(srcPath, path.sep, '*');
         }
 
         // console.log('处理后=', srcPath)

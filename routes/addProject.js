@@ -45,7 +45,7 @@ router.post('/', function(req, res, next) {
                 project.save(function(err, project) {
                     if (err) {
                         res.status('404');
-                        res.end();
+                        res.end('数据库错误');
                     } else {
                         var isExists = fs.existsSync(projectPath);
 
