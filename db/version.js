@@ -25,6 +25,30 @@ VersionSchema.static('findByName', function(name, cb) {
     }, cb)
 });
 
+VersionSchema.static('updatePrd', function(name, prd, cb) {
+    return this.findOneAndUpdate({
+        name: name
+    }, {
+        prd: prd
+    }, cb)
+});
+
+VersionSchema.static('updatePrototype', function(name, prototype, cb) {
+    return this.findOneAndUpdate({
+        name: name
+    }, {
+        prototype: prototype
+    }, cb)
+});
+
+VersionSchema.static('updateVisual', function(name, visual, cb) {
+    return this.findOneAndUpdate({
+        name: name
+    }, {
+        visual: visual
+    }, cb)
+});
+
 
 var VersionModel = mongoose.model('Version', VersionSchema);
 module.exports = VersionModel;
