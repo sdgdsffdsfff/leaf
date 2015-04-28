@@ -1,6 +1,9 @@
 *{
   margin: 0;
   padding: 0;
+
+  -webkit-user-select:none;
+  user-select:none;
 }
 
 li{
@@ -63,6 +66,7 @@ html,body{
   margin: 20px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
   position: relative;
+  cursor: pointer;
 }
 
 .imgBox img{
@@ -79,11 +83,11 @@ html,body{
   background: rgba(0,0,0,0.7);
   color: #fff;
   bottom: 0;
-
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
-
   padding-right: 20px;
+
+
 }
 
 .imgPreview{
@@ -92,12 +96,17 @@ html,body{
   position: fixed;
   left: 0;
   top: 0;
+  background: #fff;
   background: rgba(0,0,0,0.4);
   display: none;
+  overflow: scroll;
 }
+
 .imgPreview.show{
-  display: block;
+  /*todo : 添加兼容*/
+  display: flex;
 }
 
-
-
+.imgPreview img{
+  margin: auto;
+}

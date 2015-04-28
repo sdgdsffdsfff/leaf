@@ -37,16 +37,21 @@ function bindExitFullScreen(elem,fn){
 }
 
 
-	
-
 function bindEvents(){
 	var $imgCon = document.querySelector('.imgCon');
 	var $imgPreview = document.querySelector('.imgPreview');
 
 	$imgCon.addEventListener('click',function(e){
-		// todo ： judge click to the image element
-		$imgPreview.classList.add('show');
-		fullScreen($imgPreview);
+		var $target = e.target;
+
+		if($target.nodeName === 'IMG'){
+			var src = $target.src;
+			if(!src){return;}
+			$imgPreview.classList.add('show');
+			$imgPreview.querySelector('img').setAttribute('src',src);
+			fullScreen($imgPreview);
+		}
+
 	});
 
 	bindExitFullScreen($imgPreview,function(e,isOpen){
