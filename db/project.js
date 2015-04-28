@@ -4,7 +4,20 @@ var ProjectSchema = new mongoose.Schema({
     description: String
 });
 
-var ProjetModel = mongoose.model('Projet',ProjectSchema);
+
+ProjectSchema.static('findByName', function(name, cb) {
+    return this.findOne({
+        name: name
+    }, cb)
+});
+
+
+
+
+var ProjetModel = mongoose.model('Projet', ProjectSchema);
+
+
+
 
 
 module.exports = ProjetModel;
