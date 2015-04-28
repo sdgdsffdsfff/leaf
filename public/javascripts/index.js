@@ -16,7 +16,7 @@ $addProject.on('click', function() {
         data: data
     }).done(function(msg) {
         window.location.reload();
-    }).fail(function(msg){
+    }).fail(function(msg) {
         alert(msg.responseText);
     });
 });
@@ -41,5 +41,7 @@ $addVersion.on('click', function() {
         data: data
     }).done(function(msg) {
         window.location.reload();
+    }).fail(function(msg) {
+        alert(msg.responseText);
     });
 });

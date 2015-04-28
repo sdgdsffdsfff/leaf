@@ -21,9 +21,11 @@
                 <%})%>
                 <% } %>
             <% if (title === 'versions') { %>
-                <% versions.forEach(function(el){%>
-                    <li><a href="/<%= project %>/<%=el%>"><%=el%></a></li>
-                <%})%>
+                <% if (versions.length>0) { %>
+                    <% versions.forEach(function(el){%>
+                        <li><a href="/<%= project %>/<%=el.name%>"><%=el.name%></a></li>
+                    <%})%>
+                <% } %>
             <% } %>
         </ul>
     <script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>

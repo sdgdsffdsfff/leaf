@@ -39,7 +39,8 @@ router.post('/', function(req, res, next) {
             } else {
                 var project = new Project({
                     name: projectName,
-                    description: projectPath
+                    description: projectPath,
+                    versions:[]
                 });
                 project.save(function(err, project) {
                     if (err) {
