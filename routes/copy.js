@@ -43,6 +43,11 @@ router.post('/', function(req, res, next) {
         var srcPath = req.body.srcPath;
 
 
+
+        //TDTO 处理数据库逻辑
+        //是否需要恢复文件目录？
+
+
         function findPath(srcPath) {
             var realPath = srcPath;
             if (srcPath.split('CrossShare/').length > 1) {
@@ -72,7 +77,7 @@ router.post('/', function(req, res, next) {
         var file = fs.statSync(srcPath);
 
         if (file.isDirectory()) {
-            srcPath = path.join(srcPath, path.sep, '*');
+            srcPath = path.join(srcPath, '*');
         }
 
         // console.log('处理后=', srcPath)
@@ -88,8 +93,8 @@ router.post('/', function(req, res, next) {
             fs.mkdirSync(path.join(projectPath, 'visual'));
         }
 
-        if (!fs.existsSync(path.join(projectPath, path.sep, 'prd'))) {
-            fs.mkdirSync(path.join(projectPath, path.sep, 'prd'));
+        if (!fs.existsSync(path.join(projectPath, 'prd'))) {
+            fs.mkdirSync(path.join(projectPath, 'prd'));
         }
 
 
@@ -102,7 +107,13 @@ router.post('/', function(req, res, next) {
                 console.error(stderr);
                 res.send('error');
             } else {
-                res.send('同步成功！');
+                update(type, version, {
+                    mapping: req.body.srcPath,
+                    time: new Date()
+                }, function(err, ver) {
+                    res.send('同步成功！');
+                });
+                
             }
         });
 
