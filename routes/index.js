@@ -35,13 +35,19 @@ router.get('/:project', function(req, res, next) {
 
     //数据库查询
     Project.findVersions(project, function(err, versions) {
+        var uid = '';
         if (err) {
             versions = [];
         } else {
+            uid = versions._id;
             versions = versions.versions;
         }
 
+
+
+
         res.render('index', {
+            uid: uid,
             title: 'versions',
             project: project,
             versions: versions

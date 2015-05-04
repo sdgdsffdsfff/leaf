@@ -21,9 +21,10 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var projectName = req.body.projectName;
     var version = req.body.version;
+    var uid = req.body.uid;
     var versionPath = path.join(projectRootPath, projectName, version);
 
-    Version.findByName(version, function(err, obj) {
+    Version.findByName(version, uid, function(err, obj) {
         if (err) {
             res.status('404');
             res.end('数据库错误');
@@ -42,7 +43,8 @@ router.post('/', function(req, res, next) {
             } else {
                 var newVersion = new Version({
                     name: version,
-                    date: new Date()
+                    date: new Date(),
+                    project: uid
                 });
                 newVersion.save(function(err, ver) {
                     if (err) {
