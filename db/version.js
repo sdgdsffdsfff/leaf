@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 
 
 var VersionSchema = new mongoose.Schema({
+    project: {
+        type: Schema.Types.ObjectId,
+        ref: 'Project'
+    },
     name: String,
     date: Date,
     prd: {
@@ -19,10 +23,12 @@ var VersionSchema = new mongoose.Schema({
     }
 });
 
-VersionSchema.static('findByName', function(name, cb) {
+VersionSchema.static('findByName', function(name, uid, cb) {
+    console.log(name,uid);
     return this.findOne({
-        name: name
-    }, cb)
+        name: name,
+        project: uid
+    }, cb);
 });
 
 VersionSchema.static('updatePrd', function(name, prd, cb) {

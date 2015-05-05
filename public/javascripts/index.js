@@ -30,6 +30,7 @@ $addVersion.on('click', function() {
     var $me = $(this);
 
     var data = {
+        uid: $projectName.data('uid'),
         projectName: $projectName.html(),
         version: ''
     };

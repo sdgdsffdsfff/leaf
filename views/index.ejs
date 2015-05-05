@@ -6,7 +6,7 @@
     </head>
     <body>
         <% if (title === 'versions') { %>
-            <h2 id="projectName"><%= project %></h2>
+            <h2 id="projectName" data-uid="<%=uid%>"><%= project %></h2>
             <input type="text">
             <button class="addVersion">添加版本</button>
         <% } %>
