@@ -31,6 +31,9 @@ var str = '<li data-name="%name%">' +
                 '<p>%description%</p>' +
             '</div>' + 
             '<div class="links">' +
+                '<a >PRD</a>' +
+                '<a >交互</a>' +
+                '<a >视觉</a>' +
             '</div>' + 
         '</li>';
 

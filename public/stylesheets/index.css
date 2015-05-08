@@ -11,9 +11,6 @@ html,body{
 	height: 100%;
 }
 
-body{
-	/*background: #1ab56e;*/
-}
 
 header{
 	height: 717px;
@@ -93,17 +90,6 @@ header button p{
 
 }
 
-/*.content .searchBox .searchPlaceholder.fixed{
-	position: fixed;
-	background-color: #1ab56e;
-	top: 0;
-	left: 0;
-	width: 100%;
-	margin:20px;
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-}*/
-
 
 .content .searchBox input[type=search]{
 	flex:1;
@@ -111,9 +97,7 @@ header button p{
 	font-size: 18px;
 	padding-left: 19px;
 	border-radius: 6px;
-	/*border-bottom-left-radius: 6px;*/
 }
-
 
 .content .searchBox button{
 	height: 38px;
@@ -154,19 +138,65 @@ header button p{
 
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
-}
 
+	background-image: url('/images/list_bg.png');
+	background-image: -webkit-image-set( url('/images/list_bg.png') 1x, url('/images/list_bg@2x.png') 2x );
 
-.projectList li .desc{
-		
 }
 
 .projectList li:hover{
 	background-color: #18a564;
 }
 
+.projectList li:active{
+	background-position: 0 -160px;
+	background-color: #fff;
+	color: #1ab56e;
+}
 
+.projectList li .desc{
+	width: 380px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
+.projectList li .desc h3{
+	display: inline-block;
+	font-size: 40px;
+	margin-bottom: 30px;
+}
 
+.projectList li .desc span{
+	display: inline-block;
+	font-size: 18px;
+}
+
+.projectList li .desc p{
+	font-size: 24px;
+}
+
+.projectList li .links{
+	flex:1;
+	display: flex;
+	margin-right: 90px;
+}
+
+.projectList li .links a{
+	margin: auto;
+	display: block;
+	background-color: #19c777;
+	color: #fff;
+	width: 88px;
+	height: 88px;
+	border-radius: 88px;
+	text-align: center;
+	line-height: 88px;
+	font-size: 20px;
+}
+
+.projectList li .links a:active{
+	background-color: #ffffff;
+	color: #1ab56e;
+}
 
 
