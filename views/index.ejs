@@ -10,10 +10,22 @@
         <img src="images/logo.png" alt="" srcset="images/logo.png 1x, images/logo@2x.png 2x" draggable="false"/>
         <h1>LEAF</h1>
         <div class="addBox">
-            <button>
+            <button style="display:none;">
                 <img src="images/add.png" alt="" srcset="images/add.png 1x, images/add@2x.png 2x"/>
                 <p>创建新项目</p>
             </button>
+
+            <div class="formBox">
+                <form id="projectForm" >
+                    <ul>
+                        <li><span>项目名称：</span><input type="text" name="projectName" placeholder="请输入项目名字"></li>
+                        <li><span>项目描述：</span><textarea name="description"></textarea></li>
+                    </ul>
+                    <button class="addProject" type="submit">确定</button>
+                    <button class="cancel">取消</button>
+                </form>  
+            </div>
+
         </div>
     </header>
 
@@ -23,12 +35,6 @@
             <div class="searchBox">
                 <input id="searchField" type="search" placeholder="输入您想要搜索的关键字" />
             </div>
-
-            <form id="projectForm" style="display:none;">
-                <input type="text" name="projectName">
-                <textarea name="description"></textarea>
-                <button class="addProject" type="submit">添加版本</button>
-            </form>
             
             <h2>最近更新的项目</h2>
             <ul id="projectList" class="projectList"></ul>

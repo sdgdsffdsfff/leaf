@@ -10,11 +10,12 @@ body{
 	color: #333;
 }
 
-input[type=search],textarea,button{
+input[type=search],input[type="text"],textarea,button{
 	-webkit-appearance: none;
 	appearance: none;
 	border: none;
 	outline: none;
+	resize: none;
 }
 
 li{

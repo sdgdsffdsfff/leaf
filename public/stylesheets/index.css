@@ -45,8 +45,13 @@ header h1{
     -webkit-user-select:none;
     user-select:none;
 }
+header .addBox{
+	display: flex;
+	max-width: 1024px;
+	margin: 0 auto;
+}
 
-header  button{
+header .addBox > button{
 	-webkit-appearance: none;
 	appearance: none;
 	outline: none;
@@ -55,10 +60,75 @@ header  button{
 	cursor: pointer;
 }
 
-header button p{
+header .addBox > button p{
 	font-size: 20px;
 	line-height: 60px;
 	color: #1ab56e;
+}
+
+header .formBox {
+	position: relative;
+	border: 2px solid #1ab56e;
+	background-color: #ffffff;
+	height: 176px;
+	border-radius: 10px;
+
+	padding: 6px 22px;
+	
+	font-size: 16px;
+}
+header .formBox:after, header .formBox:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+header .formBox:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: #ffffff;
+	border-width: 15px;
+	margin-top: -15px;
+}
+
+header .formBox:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #1ab56e;
+	border-width: 17px;
+	margin-top: -17px;
+}
+
+header .formBox li span{
+	display: inline-block;
+	color: #1ab56e;
+	vertical-align: middle;
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+header .formBox li:first-child {
+	height: 50px;
+	border-bottom: 1px solid #1ab56e;
+}
+
+header .formBox li:first-child span{
+	line-height: 50px;
+}
+
+header .formBox li:first-child input{
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+
+
+header .formBox {
+	font-size: 16px;
+	vertical-align: middle;
 }
 
 .content{
@@ -87,9 +157,7 @@ header button p{
 	margin: 20px 0;
 	display: flex;
 	height: 38px;
-
 }
-
 
 .content .searchBox input[type=search]{
 	flex:1;
@@ -141,6 +209,7 @@ header button p{
 
 	background-image: url('/images/list_bg.png');
 	background-image: -webkit-image-set( url('/images/list_bg.png') 1x, url('/images/list_bg@2x.png') 2x );
+	background-position: right 0;
 
 }
 
@@ -149,13 +218,13 @@ header button p{
 }
 
 .projectList li:active{
-	background-position: 0 -160px;
+	background-position: right -160px;
 	background-color: #fff;
 	color: #1ab56e;
 }
 
 .projectList li .desc{
-	width: 380px;
+	width: 38%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
@@ -198,5 +267,7 @@ header button p{
 	background-color: #ffffff;
 	color: #1ab56e;
 }
+
+
 
 
