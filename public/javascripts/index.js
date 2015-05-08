@@ -21,13 +21,14 @@ $projectForm.on('submit', function (e) {
 var $projectList = $('#projectList');
 var projectListCache = [];
 
-function drawProjectList() {
-    var str = '<li>' +
+var fuse = new Fuse(projectListCache, { keys: ['name'] });
+var str = '<li>' +
     '<a href="%href%">' +
-        '<h3>%name%</h3>' +
+    '<h3>%name%</h3>' +
     '</a>' +
     '</li>';
 
+function drawProjectList() {
     $.ajax({
         method: "POST",
         url: "/listProject"
@@ -35,6 +36,7 @@ function drawProjectList() {
         var html = '';
         if (msg.length > 0) {
             projectListCache = msg;
+            fuse = new Fuse(projectListCache, { keys: ['name'] });
             msg.forEach(function (o, i) {
                 var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
                     return o[$3] ? o[$3] : '';
@@ -53,27 +55,21 @@ function drawProjectList() {
 drawProjectList();
 
 
-//var $addVersion = $('.addVersion');
-//var $projectName = $('#projectName');
-//
-//
-//$addVersion.on('click', function() {
-//    var $me = $(this);
-//
-//    var data = {
-//        uid: $projectName.data('uid'),
-//        projectName: $projectName.html(),
-//        version: ''
-//    };
-//
-//    data.version = $me.prev('input').val();
-//    $.ajax({
-//        method: "POST",
-//        url: "/addVersion",
-//        data: data
-//    }).done(function(msg) {
-//        window.location.reload();
-//    }).fail(function(msg) {
-//        alert(msg.responseText);
-//    });
-//});
+var $searchButton = $('#searchButton');
+
+$searchButton.on('click', function () {
+    var $me = $(this);
+    var key  = $me.prev('input').val();
+    var data = fuse.search(key);
+    var html = '';
+    if (data.length > 0) {
+        data.forEach(function (o, i) {
+            var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
+                return o[$3] ? o[$3] : '';
+            });
+            html += t;
+        });
+
+        $projectList.html(html);
+    }
+});
