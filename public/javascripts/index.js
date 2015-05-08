@@ -97,6 +97,13 @@ $searchField.on('input', function () {
             });
             html += t;
         });
+    }else{
+        projectListCache.forEach(function (o, i) {
+            var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
+                return o[$3] ? o[$3] : '';
+            });
+            html += t;
+        });
     }
     $projectList.html(html);
 });
