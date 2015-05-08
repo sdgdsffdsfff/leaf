@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
 // 4.不存在--先插入数据库，成功，新建文件目录
 router.post('/', function(req, res, next) {
     var projectName = req.body.projectName;
+    var description = req.body.description;
     var projectPath = path.join(projectRootPath, projectName);
 
 
@@ -39,7 +40,7 @@ router.post('/', function(req, res, next) {
             } else {
                 var project = new Project({
                     name: projectName,
-                    description: projectPath,
+                    description: description,
                     versions:[]
                 });
                 project.save(function(err, project) {

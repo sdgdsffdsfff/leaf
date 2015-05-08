@@ -9,20 +9,9 @@ var Version = require('../db/version');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-    //数据库查询
-    Project.find({}, function(err, projects) {
-        if (err) {
-            projects = [];
-        }
-
-        projects = [];
         res.render('index', {
-            title: 'projects',
-            projects: projects
+            title: 'projects'
         });
-    });
-
 });
 
 

@@ -4,11 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  = require('multer')
 
 var routes = require('./routes/index');
 var copy = require('./routes/copy');
 var addProject = require('./routes/addProject');
 var addVersion = require('./routes/addVersion');
+var listProject = require('./routes/listProject');
 
 var fs = require('fs');
 var path = require('path');
@@ -25,6 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(multer());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/projects", express.static(__dirname + "/projects"));
@@ -34,6 +37,7 @@ app.use('/', routes);
 app.use('/copy', copy);
 app.use('/addProject', addProject);
 app.use('/addVersion', addVersion);
+app.use('/listProject', listProject);
 
 // judge projects is exist . if not mkdir projects folder
 fs.exists(path.join(__dirname,'/projects'),function(exists){

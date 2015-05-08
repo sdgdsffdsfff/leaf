@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/global.css' />
-        <link rel='stylesheet' href='/stylesheets/index.css' />
-    </head>
-    <body>
-        <header>
-            <img src="images/logo.png" alt="" srcset="images/logo.png 1x, images/logo@2x.png 2x" draggable="false">
-            <h1>LEAF</h1>
-            <div class="addBox">
-                <button ><img src="images/add.png" alt="" srcset="images/add.png 1x, images/add@2x.png 2x"> <p>创建新项目</p> </button>
-            </div>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/global.css'/>
+    <link rel='stylesheet' href='/stylesheets/index.css'/>
+</head>
+<body>
+<header>
+    <img src="images/logo.png" alt="" srcset="images/logo.png 1x, images/logo@2x.png 2x" draggable="false">
 
-        </header>
-        <div class="content">
-            
-        </div>
+    <h1>LEAF</h1>
 
-        <% if (title === 'versions') { %>
-            <h2 id="projectName" data-uid="<%=uid%>"><%= project %></h2>
-            <input type="text">
-            <button class="addVersion">添加版本</button>
-        <% } %>
-        <% if (title === 'projects') { %>
-            <input type="text">
-            <button class="addProject">添加项目</button>
-        <% } %>
-        <ul>
-            <% if (title === 'projects') { %>
-                <% projects.forEach(function(el){%>
-                    <li><a href="/<%=el.name%>"><%=el.name%></a></li>
-                <%})%>
-                <% } %>
-            <% if (title === 'versions') { %>
-                <% if (versions.length>0) { %>
-                    <% versions.forEach(function(el){%>
-                        <li><a href="/<%= project %>/<%=el.name%>"><%=el.name%></a></li>
-                    <%})%>
-                <% } %>
-            <% } %>
-        </ul>
-    <script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>
-    <script src="/javascripts/index.js"></script>
-    </body>
+    <div class="addBox">
+        <button>
+            <img src="images/add.png" alt="" srcset="images/add.png 1x, images/add@2x.png 2x">
+
+            <p>创建新项目</p>
+        </button>
+    </div>
+</header>
+
+<div class="content">
+    <form id="projectForm">
+        <input type="text" name="projectName">
+        <textarea name="description"></textarea>
+        <button class="addVersion" type="submit">添加版本</button>
+    </form>
+    <ul id="projectList">
+
+    </ul>
+</div>
+
+
+<script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/javascripts/index.js"></script>
+</body>
 </html>
