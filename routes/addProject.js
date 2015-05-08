@@ -41,6 +41,7 @@ router.post('/', function(req, res, next) {
                 var project = new Project({
                     name: projectName,
                     description: description,
+                    updateTime:new Date(),
                     versions:[]
                 });
                 project.save(function(err, project) {

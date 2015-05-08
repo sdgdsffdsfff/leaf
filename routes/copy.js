@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-function update(type, version, newContent, cb) {
+function update(projectName,type, version, newContent, cb) {
 
     switch (type) {
         case 'prd':
@@ -31,6 +31,12 @@ function update(type, version, newContent, cb) {
             break;
     }
 
+    Project.findByName(projectName, function(err, obj) {
+            if (obj) {
+                obj.updateTime = new Date();
+                obj.save();
+            }
+    });
 }
 
 
@@ -107,13 +113,13 @@ router.post('/', function(req, res, next) {
                 console.error(stderr);
                 res.send('error');
             } else {
-                update(type, version, {
+                update(projectName,type, version, {
                     mapping: req.body.srcPath,
                     time: new Date()
                 }, function(err, ver) {
                     res.send('同步成功！');
                 });
-                
+
             }
         });
 
