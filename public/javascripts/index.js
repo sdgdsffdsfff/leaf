@@ -21,18 +21,20 @@ $projectForm.on('submit', function (e) {
 var $projectList = $('#projectList');
 var projectListCache = [];
 
+
+var fuse = new Fuse(projectListCache, { keys: ['name'] });
+
+var str = '<li data-name="%name%">' +
+            '<div class="desc">'+
+                '<h3>%name%</h3>' +
+                '<span>%data% 更新</span>' +
+                '<p>%description%</p>' +
+            '</div>' + 
+            '<div class="links">' +
+            '</div>' + 
+        '</li>';
+
 function drawProjectList() {
-    var str = '<li data-name="%name%">' +
-        '<div class="desc">'+
-            '<h3>%name%</h3>' +
-            '<span>%data% 更新</span>' +
-            '<p>%description%</p>' +
-        '</div>' + 
-        '<div class="links">' +
-
-        '</div>' + 
-    '</li>';
-
     $.ajax({
         method: "POST",
         url: "/listProject"
@@ -40,6 +42,7 @@ function drawProjectList() {
         var html = '';
         if (msg.length > 0) {
             projectListCache = msg;
+            fuse = new Fuse(projectListCache, { keys: ['name'] });
             msg.forEach(function (o, i) {
                 // console.log(o);
 
@@ -79,27 +82,21 @@ $(window).on('scroll',function(e){
 })
 
 
-//var $addVersion = $('.addVersion');
-//var $projectName = $('#projectName');
-//
-//
-//$addVersion.on('click', function() {
-//    var $me = $(this);
-//
-//    var data = {
-//        uid: $projectName.data('uid'),
-//        projectName: $projectName.html(),
-//        version: ''
-//    };
-//
-//    data.version = $me.prev('input').val();
-//    $.ajax({
-//        method: "POST",
-//        url: "/addVersion",
-//        data: data
-//    }).done(function(msg) {
-//        window.location.reload();
-//    }).fail(function(msg) {
-//        alert(msg.responseText);
-//    });
-//});
+
+var $searchField = $('#searchField');
+
+$searchField.on('input', function () {
+    // var $me = $(this);
+    var key  = $(this).val();
+    var data = fuse.search(key);
+    var html = '';
+    if (data.length > 0) {
+        data.forEach(function (o, i) {
+            var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
+                return o[$3] ? o[$3] : '';
+            });
+            html += t;
+        });
+    }
+    $projectList.html(html);
+});
