@@ -9,9 +9,9 @@ var Version = require('../db/version');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-        res.render('index', {
-            title: 'projects'
-        });
+    res.render('index', {
+        title: 'projects'
+    });
 });
 
 
@@ -29,16 +29,21 @@ router.get('/:project', function(req, res, next) {
         if (err) {
             versions = [];
         } else {
-            uid = versions._id;
-            versions = versions.versions;
+            if (versions) {
+                uid = versions._id;
+                versions = versions.versions;
+                res.render('version', {
+                    title: 'version',
+                    uid: uid,
+                    project: project,
+                    versions: versions
+                });
+            } else {
+                res.render('error', {
+                    message: '无此项目!'
+                });
+            }
         }
-
-        res.render('index', {
-            uid: uid,
-            title: 'versions',
-            project: project,
-            versions: versions
-        });
 
     });
 
@@ -59,15 +64,19 @@ router.get('/:project/:version', function(req, res, next) {
         if (err) {
             ver = {};
         } else {
-            ver = ver || {}
+            if (ver) {
+                // console.log(ver);
+
+                ver.title = '版本详情页';
+                ver.version = version;
+
+                res.render('detail', ver);
+            } else {
+                res.render('error', {
+                    message: '无此版本!'
+                });
+            }
         }
-
-        // console.log(ver);
-
-        ver.title = '版本详情页';
-        ver.version = version;
-
-        res.render('detail', ver);
 
     });
 
@@ -115,7 +124,7 @@ router.get('/:project/:version/prd', function(req, res, next) {
 });
 
 // get prototype page
-router.get('/:project/:version?/prototype', function(req, res, next) {
+router.get('/:project/:version/prototype', function(req, res, next) {
     var version = req.params.version;
     var project = req.params.project;
     var host = req.headers.host;
@@ -152,7 +161,7 @@ router.get('/:project/:version?/prototype', function(req, res, next) {
 });
 
 // get visual page
-router.get('/:project/:version?/visual', function(req, res, next) {
+router.get('/:project/:version/visual', function(req, res, next) {
 
     var version = req.params.version;
     var project = req.params.project;
