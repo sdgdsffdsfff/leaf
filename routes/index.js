@@ -15,11 +15,12 @@ router.get('/', function(req, res, next) {
         if (err) {
             projects = [];
         }
+
+        projects = [];
         res.render('index', {
             title: 'projects',
             projects: projects
         });
-
     });
 
 });
@@ -42,9 +43,6 @@ router.get('/:project', function(req, res, next) {
             uid = versions._id;
             versions = versions.versions;
         }
-
-
-
 
         res.render('index', {
             uid: uid,

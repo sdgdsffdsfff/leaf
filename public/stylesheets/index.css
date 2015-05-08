@@ -1,0 +1,72 @@
+@font-face {font-family: 'MoolBoran';
+    src: url('../fonts/MoolBoran.eot'); /* IE9*/
+    src: url('../fonts/MoolBoran.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/MoolBoran.woff') format('woff'), /* chrome、firefox */
+    url('../fonts/MoolBoran.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../fonts/MoolBoran.svg#MoolBoran') format('svg'); /* iOS 4.1- */
+}
+
+html,body{
+	width: 100%;
+	height: 100%;
+}
+
+header{
+	background: #ffffff;
+	height: 717px;
+	text-align: center;
+	background-image: url(/images/line1.png),url(/images/line2.png),url(/images/line3.png); 
+	background-repeat: repeat-x; 
+	/*-webkit-animation: animatedBackground 200s infinite;*/
+	/*animation: animatedBackground 200s infinite;*/
+}
+
+header > img{
+	width: 139px;
+	height: 253px;
+	margin-top: 90px;
+}
+
+header h1{
+	color: #1ab56e;
+    font-family:"MoolBoran" !important;
+    font-size: 120px;
+    font-weight: normal;
+    line-height: 120px;
+    margin-top: 20px;
+    -webkit-user-select:none;
+    user-select:none;
+}
+
+header  button{
+	-webkit-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	background-color: rgba(0,0,0,0);
+	cursor: pointer;
+}
+
+header button p{
+	font-size: 20px;
+	line-height: 60px;
+	color: #1ab56e;
+}
+
+
+
+.content{
+	background: #1ab56e;
+	height: 100%;
+}
+
+
+@-webkit-keyframes animatedBackground {
+	from { background-position: 0 0 , 0 0, 0 0 ; }
+	to { background-position: 200% 0, -400% 0, 400% 0; }
+}
+
+@keyframes animatedBackground {
+	from { background-position: 0 0 , 0 0, 0 0 ; }
+	to { background-position: 200% 0, -400% 0, 400% 0; }
+}
