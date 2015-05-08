@@ -12,11 +12,20 @@ $projectForm.on('submit', function (e) {
         data: data
     }).done(function (msg) {
         drawProjectList();
+        window.location.href = '#content';
+        clearForm();
     }).fail(function (msg) {
         alert(msg.responseText);
+        if(msg.responseText === '项目已存在!'){
+            var name = $('input[name=projectName]').val();
+            $('#searchField').val(name).trigger('input').focus();
+        }
     });
 });
 
+$('.formBox').on('click','.cancel',function(){
+    clearForm();
+});
 
 var $projectList = $('#projectList');
 var projectListCache = [];
@@ -25,9 +34,10 @@ var projectListCache = [];
 var fuse = new Fuse(projectListCache, { keys: ['name'] });
 
 var str = '<li data-name="%name%">' +
+            '<a id="%name%"></a>' +
             '<div class="desc">'+
                 '<h3>%name%</h3>' +
-                '<span>%data% 更新</span>' +
+                // '<span>%data% 更新</span>' +
                 '<p>%description%</p>' +
             '</div>' + 
             '<div class="links">' +
@@ -47,8 +57,6 @@ function drawProjectList() {
             projectListCache = msg;
             fuse = new Fuse(projectListCache, { keys: ['name'] });
             msg.forEach(function (o, i) {
-                // console.log(o);
-
                 var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
                     return o[$3] ? o[$3] : '';
                 });
@@ -72,7 +80,6 @@ $(window).on('scroll',function(e){
 
     // 假如超过高度就悬浮
     if(_top >= headerHeight){
-        // $('.searchPlaceholder').addClass('fixed');
     }else{
         // $('.searchPlaceholder').removeClass('fixed');
         var scale = (2-_top/headerHeight)/2;
@@ -87,11 +94,10 @@ $(window).on('scroll',function(e){
 var $searchField = $('#searchField');
 
 $searchField.on('input', function () {
-    // var $me = $(this);
+
     var key  = $(this).val();
     var html = '无匹配结果!';
 
-    console.log(projectListCache);
     if(key.length === 0 ){
         html = '';
         projectListCache.forEach(function (o, i) {
@@ -116,6 +122,9 @@ $searchField.on('input', function () {
         });
     }
     $projectList.html('').html(html);
+
+    window.location.href = '#content';
+
 });
 
 $('#projectList').on('click','li',function(){
@@ -124,6 +133,20 @@ $('#projectList').on('click','li',function(){
         window.location.href = '/'+name;
     }
 })
+
+
+$('#addNew').on('click',function(){
+    $('header .addBox').addClass('open');
+    $('input[name=projectName]').focus();
+});
+
+function clearForm(){
+    $('header .addBox').removeClass('open');
+    $projectForm[0].reset();
+}
+
+
+
 
 
 

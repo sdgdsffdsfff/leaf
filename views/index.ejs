@@ -10,26 +10,31 @@
         <img src="images/logo.png" alt="" srcset="images/logo.png 1x, images/logo@2x.png 2x" draggable="false"/>
         <h1>LEAF</h1>
         <div class="addBox">
-            <button style="display:none;">
-                <img src="images/add.png" alt="" srcset="images/add.png 1x, images/add@2x.png 2x"/>
-                <p>创建新项目</p>
-            </button>
+
+            <div class="btnBox">
+                <button id="addNew">
+                    <img src="images/add.png" alt="" srcset="images/add.png 1x, images/add@2x.png 2x"/>
+                    <p>创建新项目</p>
+                </button>
+            </div>
 
             <div class="formBox">
                 <form id="projectForm" >
                     <ul>
-                        <li><span>项目名称：</span><input type="text" name="projectName" placeholder="请输入项目名字"></li>
-                        <li><span>项目描述：</span><textarea name="description"></textarea></li>
+                        <li><span>项目名称：</span><input type="text" name="projectName" placeholder="请输入项目名字" required></li>
+                        <li><span>项目描述：</span><textarea name="description" placeholder="请输入项目描述" required></textarea></li>
                     </ul>
-                    <button class="addProject" type="submit">确定</button>
-                    <button class="cancel">取消</button>
+                    <div class="btns">
+                        <button class="addProject" type="submit">确定</button>
+                        <button class="cancel" type="button" >取消</button>
+                    </div>
                 </form>  
             </div>
 
         </div>
     </header>
 
-    <div class="content">
+    <div class="content" id="content">
         <div class="inner">
             
             <div class="searchBox">

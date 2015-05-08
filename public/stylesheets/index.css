@@ -11,9 +11,8 @@ html,body{
 	height: 100%;
 }
 
-
 header{
-	height: 717px;
+	height: 848px;
 	text-align: center;
 	background-color: #fff;
 	background-image: url('/images/header_bg.png');
@@ -46,12 +45,24 @@ header h1{
     user-select:none;
 }
 header .addBox{
+	display: -webkit-flex;
 	display: flex;
 	max-width: 1024px;
 	margin: 0 auto;
+	padding: 0 20px;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
 }
 
-header .addBox > button{
+header .addBox .btnBox {
+	margin: auto;
+}
+
+header .addBox.open .btnBox {
+	margin: 0 40px 0 0; 
+}
+
+header .addBox .btnBox > button{
 	-webkit-appearance: none;
 	appearance: none;
 	outline: none;
@@ -60,13 +71,19 @@ header .addBox > button{
 	cursor: pointer;
 }
 
-header .addBox > button p{
+header .addBox .btnBox > button p{
 	font-size: 20px;
 	line-height: 60px;
 	color: #1ab56e;
 }
 
-header .formBox {
+header .formBox{
+	-webkit-flex:1;
+	flex:1;
+	display: none;
+}
+
+header .formBox ul{
 	position: relative;
 	border: 2px solid #1ab56e;
 	background-color: #ffffff;
@@ -76,10 +93,22 @@ header .formBox {
 	padding: 6px 22px;
 	
 	font-size: 16px;
+	text-align: left;
+
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+
+	font-size: 16px;
+	vertical-align: middle;
 }
-header .formBox:after, header .formBox:before {
+
+header .addBox.open .formBox{
+	display: block;
+}
+
+header .formBox ul:after, header .formBox ul:before {
 	right: 100%;
-	top: 50%;
+	top: 26%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -88,18 +117,23 @@ header .formBox:after, header .formBox:before {
 	pointer-events: none;
 }
 
-header .formBox:after {
+header .formBox ul:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #ffffff;
 	border-width: 15px;
 	margin-top: -15px;
 }
 
-header .formBox:before {
+header .formBox ul:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #1ab56e;
-	border-width: 17px;
-	margin-top: -17px;
+	border-width: 18px;
+	margin-top: -18px;
+}
+
+header .formBox li {
+	display: -webkit-flex;
+	display: flex;
 }
 
 header .formBox li span{
@@ -122,25 +156,66 @@ header .formBox li:first-child span{
 header .formBox li:first-child input{
 	font-size: 16px;
 	vertical-align: middle;
+	-webkit-flex:1;
+	flex:1;
 }
 
+header .formBox li:nth-child(2) span{
+	line-height: 30px;
+	vertical-align: top;
+}
 
-
-header .formBox {
+header .formBox textarea{
+	line-height: 30px;
+	height: 90px;
+	vertical-align: top;
 	font-size: 16px;
-	vertical-align: middle;
+	-webkit-flex:1;
+	flex:1;
 }
+
+
+header .formBox .btns{
+	text-align: right;
+	margin-top: 22px;
+}
+
+
+header .formBox .btns button{
+	width: 130px;
+	height: 54px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 20px;
+	margin-left: 20px;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+
+header .formBox .btns button.addProject{
+	color: #fff;
+	background-color: #19c777;
+}
+
+header .formBox .btns button.cancel{
+	background-color: #fff;
+	border: 2px solid #ff3c25;
+	color: #ff3c25;
+}
+
 
 .content{
 	z-index: 250;
-	margin-top: 717px;
+	margin-top: 848px;
 	overflow: hidden;
 	background-color: #1ab56e;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	min-height: calc(100% - 717px);
+	min-height: 100%;
+
 }
 
 .content .inner{
@@ -155,11 +230,13 @@ header .formBox {
 	height: 38px;
 	width: 100%;
 	margin: 20px 0;
+	display: -webkit-flex;
 	display: flex;
 	height: 38px;
 }
 
 .content .searchBox input[type=search]{
+	-webkit-flex:1;
 	flex:1;
 	height: 100%;
 	font-size: 18px;
@@ -200,6 +277,7 @@ header .formBox {
 	-webkit-user-select:none;
 	user-select:none;
 	cursor: pointer;
+	display: -webkit-flex;
 	display: flex;
 	background-color: #1ab56e;
 	color: #fff;
@@ -245,7 +323,9 @@ header .formBox {
 }
 
 .projectList li .links{
+	-webkit-flex:1;
 	flex:1;
+	display: -webkit-flex;
 	display: flex;
 	margin-right: 90px;
 }
