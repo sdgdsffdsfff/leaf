@@ -68,11 +68,40 @@ header button p{
 
 .content .searchBox{
 	display: flex;
+	margin: 20px 0;
+	height: 38px;
 }
 
-.content input[type=search]{
+.content .searchBox input[type=search]{
 	flex:1;
+	height: 100%;
+	font-size: 18px;
+	padding-left: 19px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
 }
+
+
+.content .searchBox button{
+	height: 38px;
+	width: 100px;
+	background-color: #19c777;
+	border: none;
+	color: #fff;
+	font-size: 18px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	outline: none;
+}
+.content .searchBox button:active{
+	background-color: #ffffff;
+	color: #1ab56e;
+}
+
+.projectList li{
+	
+}
+
 
 
 

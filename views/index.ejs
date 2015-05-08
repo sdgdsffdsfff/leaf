@@ -20,7 +20,7 @@
     <div class="content">
         <div class="inner">
             <div class="searchBox">
-                <input type="search" />
+                <input type="search" placeholder="输入您想要搜索的关键字" />
                 <button>搜索</button>
             </div>
 
@@ -29,9 +29,15 @@
                 <textarea name="description"></textarea>
                 <button class="addVersion" type="submit">添加版本</button>
             </form>
-            <ul id="projectList"></ul>
+
+            <ul id="projectList" class="projectList"></ul>
         </div>
     </div>
+
+
+    <template id="list">
+        <li></li>
+    </template>
 
     <script src="http://libs.useso.com/js/jquery/2.1.1-rc2/jquery.min.js"></script>
     <script src="/javascripts/index.js"></script>

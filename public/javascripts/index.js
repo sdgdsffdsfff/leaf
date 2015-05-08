@@ -22,17 +22,27 @@ var $projectList = $('#projectList');
 var projectListCache = [];
 
 function drawProjectList() {
+    var str = '<li>' +
+    '<a href="%href%">' +
+        '<h3>%name%</h3>' +
+    '</a>' +
+    '</li>';
+
     $.ajax({
         method: "POST",
         url: "/listProject"
     }).done(function (msg) {
-        var str = '';
+        var html = '';
         if (msg.length > 0) {
             projectListCache = msg;
             msg.forEach(function (o, i) {
-                str += '<li>' + o.name + '</li>';
+                var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
+                    return o[$3] ? o[$3] : '';
+                });
+                html += t;
             });
-            $projectList.html(str);
+
+            $projectList.html(html);
         }
     }).fail(function (msg) {
         alert(msg);

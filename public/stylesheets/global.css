@@ -7,11 +7,16 @@
 
 body{
 	font: 12px/1.5 "Microsoft YaHei","Hiragino Sans GB";
+	color: #333;
 }
 
-input[type=search],textarea{
+input[type=search],textarea,button{
 	-webkit-appearance: none;
+	appearance: none;
 	border: none;
 	outline: none;
-	height: 38px;
+}
+
+li{
+	list-style: none;
 }
