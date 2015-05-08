@@ -2,3 +2,7 @@
 .idea
 node_modules
 /projects/
+
+#config file
+
+config.json

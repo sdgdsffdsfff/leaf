@@ -12,6 +12,15 @@ var addProject = require('./routes/addProject');
 var addVersion = require('./routes/addVersion');
 var listProject = require('./routes/listProject');
 
+var config;
+
+try{
+  config = require('./config.json');
+}catch(e){
+  console.log(e)
+  config = {};
+}
+
 var fs = require('fs');
 var path = require('path');
 
@@ -81,7 +90,15 @@ app.use(function(err, req, res, next) {
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://leaf:leaf@192.168.112.94:27017/leaf');
+console.log(config)
+
+if(config.mongodb){
+  console.log(config.mongodb);
+  mongoose.connect(config.mongodb);
+}else{
+  mongoose.connect('mongodb://leaf:leaf@192.168.112.94:27017/leaf');
+}
+
 
 
 module.exports = app;
