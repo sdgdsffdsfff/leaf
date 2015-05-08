@@ -31,6 +31,9 @@ var str = '<li data-name="%name%">' +
                 '<p>%description%</p>' +
             '</div>' + 
             '<div class="links">' +
+                '<a href="/%name%#prd">PRD</a>' +
+                '<a href="/%name%#prototype" >交互</a>' +
+                '<a href="/%name%#visual">视觉</a>' +
             '</div>' + 
         '</li>';
 
@@ -78,9 +81,7 @@ $(window).on('scroll',function(e){
             'transform' : 'scale3d('+scale+','+scale+',1)'
         })
     }
-
 })
-
 
 
 var $searchField = $('#searchField');
@@ -116,3 +117,13 @@ $searchField.on('input', function () {
     }
     $projectList.html('').html(html);
 });
+
+$('#projectList').on('click','li',function(){
+    var name = $(this).data('name');
+    if(name){
+        window.location.href = '/'+name;
+    }
+})
+
+
+
