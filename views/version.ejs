@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h2 id="projectName" data-uid="<%=uid%>"><%= project %></h2>
+    <input type="text">
+    <button class="addVersion">添加版本</button>
+    <% if (versions.length>0) { %>
+      <% versions.forEach(function(el){%>
+      <li><a href="/<%= project %>/<%=el.name%>"><%=el.name%></a></li>
+      <%})%>
+    <% } %>
+  </body>
+</html>
