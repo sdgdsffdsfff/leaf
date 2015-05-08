@@ -55,7 +55,7 @@ function drawProjectList() {
                 html += t;
             });
 
-            $projectList.html(html);
+            $projectList.html('').html(html);
         }
     }).fail(function (msg) {
         alert(msg);
@@ -91,22 +91,31 @@ var $searchField = $('#searchField');
 $searchField.on('input', function () {
     // var $me = $(this);
     var key  = $(this).val();
-    var data = fuse.search(key);
-    var html = '';
-    if (data.length > 0) {
-        data.forEach(function (o, i) {
-            var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
-                return o[$3] ? o[$3] : '';
-            });
-            html += t;
-        });
-    }else{
+    var html = '无匹配结果!';
+
+    console.log(projectListCache);
+    if(key.length === 0 ){
+        html = '';
         projectListCache.forEach(function (o, i) {
             var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
                 return o[$3] ? o[$3] : '';
             });
             html += t;
         });
+        $projectList.html('').html(html);
+        return;
     }
-    $projectList.html(html);
+
+    var data = fuse.search(key);
+
+    if (data.length > 0) {
+        html = '';
+        data.forEach(function (o, i) {
+            var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
+                return o[$3] ? o[$3] : '';
+            });
+            html += t;
+        });
+    }
+    $projectList.html('').html(html);
 });

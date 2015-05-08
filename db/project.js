@@ -8,6 +8,7 @@ var Version = require('./version');
 var ProjectSchema = new mongoose.Schema({
     name: String,
     description: String,
+    updateTime:Date,
     versions: [{
         type: Schema.Types.ObjectId,
         ref: 'Version'

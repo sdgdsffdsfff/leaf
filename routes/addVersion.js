@@ -68,6 +68,7 @@ router.post('/', function(req, res, next) {
             } else {
                 if (obj) {
                     obj.versions.push(ver);
+                    obj.updateTime = new Date();
                     obj.save(function(err, pro) {
                         if (err) {
                             res.status('404');
