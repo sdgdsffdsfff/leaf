@@ -73,6 +73,7 @@ header button p{
 	top: 0;
 	left: 0;
 	width: 100%;
+	min-height: calc(100% - 717px);
 }
 
 .content .inner{
@@ -109,8 +110,8 @@ header button p{
 	height: 100%;
 	font-size: 18px;
 	padding-left: 19px;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
+	border-radius: 6px;
+	/*border-bottom-left-radius: 6px;*/
 }
 
 
