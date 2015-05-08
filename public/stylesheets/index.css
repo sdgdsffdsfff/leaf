@@ -11,14 +11,17 @@ html,body{
 	height: 100%;
 }
 
+body{
+	background: #1ab56e;
+}
+
 header{
-	background: #ffffff;
 	height: 717px;
 	text-align: center;
-	background-image: url(/images/line1.png),url(/images/line2.png),url(/images/line3.png); 
-	background-repeat: repeat-x; 
-	/*-webkit-animation: animatedBackground 200s infinite;*/
-	/*animation: animatedBackground 200s infinite;*/
+	background-color: #fff;
+	background-image: url('/images/header_bg.png');
+	background-image: -webkit-image-set( url('/images/header_bg.png') 1x, url('/images/header_bg@2x.png') 2x );
+	background-position: center; 
 }
 
 header > img{
@@ -54,19 +57,21 @@ header button p{
 }
 
 
+.content .inner{
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 0 20px;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
 
-.content{
-	background: #1ab56e;
-	height: 100%;
+.content .searchBox{
+	display: flex;
+}
+
+.content input[type=search]{
+	flex:1;
 }
 
 
-@-webkit-keyframes animatedBackground {
-	from { background-position: 0 0 , 0 0, 0 0 ; }
-	to { background-position: 200% 0, -400% 0, 400% 0; }
-}
 
-@keyframes animatedBackground {
-	from { background-position: 0 0 , 0 0, 0 0 ; }
-	to { background-position: 200% 0, -400% 0, 400% 0; }
-}

@@ -8,3 +8,8 @@
 body{
 	font: 12px/1.5 "Microsoft YaHei","Hiragino Sans GB";
 }
+
+input[type=search],textarea{
+	-webkit-appearance: none;
+	border: none;
+}
