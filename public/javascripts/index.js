@@ -22,10 +22,15 @@ var $projectList = $('#projectList');
 var projectListCache = [];
 
 function drawProjectList() {
-    var str = '<li>' +
-    '<a href="%href%">' +
-        '<h3>%name%</h3>' +
-    '</a>' +
+    var str = '<li data-name="%name%">' +
+        '<div class="desc">'+
+            '<h3>%name%</h3>' +
+            '<span>%data% 更新</span>' +
+            '<p>%description%</p>' +
+        '</div>' + 
+        '<div class="links">' +
+
+        '</div>' + 
     '</li>';
 
     $.ajax({
@@ -36,6 +41,8 @@ function drawProjectList() {
         if (msg.length > 0) {
             projectListCache = msg;
             msg.forEach(function (o, i) {
+                // console.log(o);
+
                 var t = str.replace(/(%(\w+)%)/g,function($1,$2,$3){
                     return o[$3] ? o[$3] : '';
                 });
@@ -51,6 +58,25 @@ function drawProjectList() {
 
 
 drawProjectList();
+
+var headerHeight = $('header').height();
+
+$(window).on('scroll',function(e){
+    var _top = $(this).scrollTop();
+
+    // 假如超过高度就悬浮
+    if(_top >= headerHeight){
+        // $('.searchPlaceholder').addClass('fixed');
+    }else{
+        // $('.searchPlaceholder').removeClass('fixed');
+        var scale = (2-_top/headerHeight)/2;
+        $('header').css({
+            '-webkit-transform' : 'scale3d('+scale+','+scale+',1)',
+            'transform' : 'scale3d('+scale+','+scale+',1)'
+        })
+    }
+
+})
 
 
 //var $addVersion = $('.addVersion');

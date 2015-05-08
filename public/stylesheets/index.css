@@ -12,7 +12,7 @@ html,body{
 }
 
 body{
-	background: #1ab56e;
+	/*background: #1ab56e;*/
 }
 
 header{
@@ -23,6 +23,13 @@ header{
 	background-image: -webkit-image-set( url('/images/header_bg.png') 1x, url('/images/header_bg@2x.png') 2x );
 	background-position: center 0; 
 	background-repeat: no-repeat;
+	position: fixed;
+	z-index: 200;
+	top: 0;
+	left: 0;
+	width: 100%;
+	-webkit-transform-origin:50% 0;
+	transform-origin:50% 0;
 }
 
 header > img{
@@ -57,6 +64,16 @@ header button p{
 	color: #1ab56e;
 }
 
+.content{
+	z-index: 250;
+	margin-top: 717px;
+	overflow: hidden;
+	background-color: #1ab56e;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
 
 .content .inner{
 	max-width: 1024px;
@@ -67,10 +84,25 @@ header button p{
 }
 
 .content .searchBox{
-	display: flex;
-	margin: 20px 0;
 	height: 38px;
+	width: 100%;
+	margin: 20px 0;
+	display: flex;
+	height: 38px;
+
 }
+
+/*.content .searchBox .searchPlaceholder.fixed{
+	position: fixed;
+	background-color: #1ab56e;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin:20px;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}*/
+
 
 .content .searchBox input[type=search]{
 	flex:1;
@@ -98,9 +130,41 @@ header button p{
 	color: #1ab56e;
 }
 
-.projectList li{
-	
+.content h2{
+	color: #fff;
+	height: 67px;
+	line-height: 67px;
+	padding-left: 10px;
 }
+
+.projectList li{
+	border: 2px solid #ffffff;
+	border-radius: 6px;
+	height: 156px;
+	padding: 20px;
+	margin-bottom: 28px;
+
+	-webkit-user-select:none;
+	user-select:none;
+	cursor: pointer;
+	display: flex;
+	background-color: #1ab56e;
+	color: #fff;
+
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+
+.projectList li .desc{
+		
+}
+
+.projectList li:hover{
+	background-color: #18a564;
+}
+
+
 
 
 
