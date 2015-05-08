@@ -69,7 +69,6 @@ $searchButton.on('click', function () {
             });
             html += t;
         });
-
-        $projectList.html(html);
     }
+    $projectList.html(html);
 });
