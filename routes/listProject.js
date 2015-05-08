@@ -10,10 +10,16 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
-    Project.find({}).sort({updateTime:-1}).exec(function (err, projects) {
+    Project.find({}).sort({updateTime:-1}).populate({
+        path:'versions',
+        options:{
+            sort:{date:-1}
+        }
+    }).exec(function (err, projects) {
         if (err) {
             projects = [];
         }
+
         res.send(
             projects
         );
