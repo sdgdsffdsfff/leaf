@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
-    Project.find({}, function (err, projects) {
+    Project.find({}).sort({updateTime:-1}).exec(function (err, projects) {
         if (err) {
             projects = [];
         }
