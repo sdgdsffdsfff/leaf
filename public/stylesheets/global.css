@@ -12,4 +12,6 @@ body{
 input[type=search],textarea{
 	-webkit-appearance: none;
 	border: none;
+	outline: none;
+	height: 38px;
 }

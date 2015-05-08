@@ -21,7 +21,8 @@ header{
 	background-color: #fff;
 	background-image: url('/images/header_bg.png');
 	background-image: -webkit-image-set( url('/images/header_bg.png') 1x, url('/images/header_bg@2x.png') 2x );
-	background-position: center; 
+	background-position: center 0; 
+	background-repeat: no-repeat;
 }
 
 header > img{
