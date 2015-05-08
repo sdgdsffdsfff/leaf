@@ -194,7 +194,7 @@ header button p{
 	font-size: 20px;
 }
 
-.projectList li .links a:active{
+.projectList li .links a:hover{
 	background-color: #ffffff;
 	color: #1ab56e;
 }
