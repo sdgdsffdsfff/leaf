@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var exec = require('child_process').exec;
 var Version = require('../db/version');
+var Project = require('../db/project');
 
 var projectRootPath = path.resolve(__dirname, '../projects');
 var srcRootPath = path.resolve(__dirname, '../window');
