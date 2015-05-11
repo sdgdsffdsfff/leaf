@@ -117,7 +117,6 @@ $(window).on('scroll', function(e) {
 var $searchField = $('#searchField');
 
 $searchField.on('input', function() {
-
     var key = $(this).val();
     var html = '无匹配结果!';
 
@@ -187,11 +186,13 @@ $searchField.on('input', function() {
         });
     }
     $projectList.html('').html(html);
-
-    // 此处会阻断中文输入法
-    // window.location.href = '#content';
-
 });
+
+
+$searchField.on('focus click',function(){
+    $(window).scrollTop($('header').height());
+});
+
 
 $('#projectList').on('click', 'li', function() {
     var name = $(this).data('name');
