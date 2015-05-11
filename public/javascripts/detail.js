@@ -56,18 +56,32 @@ var showUrl = {
 };
 
 
-
 var $tab = $('.tab ');
 var $showIframe = $('#showIframe');
 
 if(window.location.hash) {
     var _hash = window.location.hash;
+    $('.tab .active').removeClass('active');
+    $('.tab a[href='+_hash+']').addClass('active');
 
     if(_hash==='#prd' || _hash === '#prototype' || _hash === '#visual'){
         _hash = _hash.substr(1);
         $showIframe.attr('src', showUrl[_hash]);
     }
 } 
+
+
+window.addEventListener("hashchange", function(){
+    var _hash = window.location.hash;
+    $('.tab .active').removeClass('active');
+    $('.tab a[href='+_hash+']').addClass('active');
+
+    if(_hash==='#prd' || _hash === '#prototype' || _hash === '#visual'){
+        _hash = _hash.substr(1);
+        $showIframe.attr('src', showUrl[_hash]);
+    }
+}, false);
+
 
 $tab.on('click', 'a', function() {
     var $me = $(this);

@@ -163,6 +163,8 @@ router.get('/:project/:version/prototype', function(req, res, next) {
 // get visual page
 router.get('/:project/:version/visual', function(req, res, next) {
 
+    console.log('hehe')
+
     var version = req.params.version;
     var project = req.params.project;
     var host = req.headers.host;

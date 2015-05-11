@@ -127,7 +127,6 @@ header .address li span{
   color: rgba(255,255,255,0.77);
 }
 
-
 .display{
   position: absolute;
   top: 450px;
@@ -142,10 +141,33 @@ header .address li span{
   position: absolute;
   top: -60px;
   width: 100%;
+  line-height: 60px;
 }
 
 .display .tab .inner{
   max-width: 1024px;
   margin: 0 auto;
+  text-align: center;
+  display:-webkit-flex;
+  display:flex;
 }
 
+.display .tab a{
+  display: inline-block;
+  font-size: 24px;
+  opacity: 0.55;
+  color: #fff;
+  margin: auto;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 10px;
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  -webkit-align-items:center;
+  align-items:center;
+}
+
+.display .tab a.active{
+  opacity: 1;
+  border-bottom: 5px solid #fff; 
+}
