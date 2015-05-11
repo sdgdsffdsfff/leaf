@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	bindEvents();
 });
 
-
-
 function fullScreen(elem){
 	if (elem.requestFullscreen) {
 	  elem.requestFullscreen();

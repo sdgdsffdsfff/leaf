@@ -2,6 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/global.css' />
     <link rel='stylesheet' href='/stylesheets/visual.css' />
   </head>
   <body>
@@ -9,7 +10,7 @@
   <div class="imgCon">
     <%images.forEach(function(el){%>
       <div class="imgBox">
-        <img src="<%=el.src%>" alt="">
+        <div class="img"><img src="<%=el.src%>" alt=""></div>
         <div class="title"><%=el.name%></div>
       </div>
     <%})%>
