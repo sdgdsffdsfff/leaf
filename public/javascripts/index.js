@@ -42,10 +42,10 @@ var str = '<li data-name="%name%">' +
     // '<span>%data% 更新</span>' +
     '<p>%description%</p>' +
     '</div>' +
-    '<div class="links">' +
-    '<a href="/%name%#prd">PRD</a>' +
-    '<a href="/%name%#prototype" >交互</a>' +
-    '<a href="/%name%#visual">视觉</a>' +
+    '<div class="links" style="display:%isShow%">' +
+    '<a href="/%name%/%newVersion%/prd">PRD</a>' +
+    '<a href="/%name%/%newVersion%/prototype" >交互</a>' +
+    '<a href="/%name%/%newVersion%/visual">视觉</a>' +
     '</div>' +
     '</li>';
 
@@ -61,12 +61,28 @@ function drawProjectList() {
                 keys: ['name']
             });
             msg.forEach(function(o, i) {
+                var newVersion = '';
+                var isShow = 'flex';
+                if (o.versions.length > 0) {
+                    newVersion = o.versions[0].name;
+                } else {
+                    isShow = 'none';
+                }
+
                 var t = str.replace(/(%(\w+)%)/g, function($1, $2, $3) {
-                    if ($3 === 'showName') {
-                        return o['name'] ? o['name'] : '';
-                    } else {
-                        return o[$3] ? o[$3] : '';
+                    switch ($3) {
+                        case 'showName':
+                            return o['name'] ? o['name'] : '';
+                            break;
+                        case 'newVersion':
+                            return newVersion;
+                            break;
+                        case 'isShow':
+                            return isShow;
+                        default:
+                            return o[$3] ? o[$3] : '';
                     }
+
                 });
                 html += t;
             });
@@ -108,12 +124,28 @@ $searchField.on('input', function() {
     if (key.length === 0) {
         html = '';
         projectListCache.forEach(function(o, i) {
+            var newVersion = '';
+            var isShow = 'flex';
+            if (o.versions.length > 0) {
+                newVersion = o.versions[0].name;
+            } else {
+                isShow = 'none';
+            }
+
             var t = str.replace(/(%(\w+)%)/g, function($1, $2, $3) {
-                if ($3 === 'showName') {
-                    return o['name'] ? o['name'] : '';
-                } else {
-                    return o[$3] ? o[$3] : '';
+                switch ($3) {
+                    case 'showName':
+                        return o['name'] ? o['name'] : '';
+                        break;
+                    case 'newVersion':
+                        return newVersion;
+                        break;
+                    case 'isShow':
+                        return isShow;
+                    default:
+                        return o[$3] ? o[$3] : '';
                 }
+
             });
             html += t;
         });
@@ -128,13 +160,28 @@ $searchField.on('input', function() {
         data.forEach(function(o, i) {
             var sKey = '<div style="color: red;  display: inline;">' + key + '</div>';
             var rStr = new RegExp(key, "g");
+            var newVersion = '';
+            var isShow = 'flex';
+            if (o.versions.length > 0) {
+                newVersion = o.versions[0].name;
+            } else {
+                isShow = 'none';
+            }
 
             var t = str.replace(/(%(\w+)%)/g, function($1, $2, $3) {
-                if ($3 === 'showName') {
-                    return o['name'].replace(rStr, sKey) || '';
-                } else {
-                    return o[$3] ? o[$3] : '';
+                switch ($3) {
+                    case 'showName':
+                        return o['name'].replace(rStr, sKey) || '';
+                        break;
+                    case 'newVersion':
+                        return newVersion;
+                        break;
+                    case 'isShow':
+                        return isShow;
+                    default:
+                        return o[$3] ? o[$3] : '';
                 }
+
             });
             html += t;
         });
