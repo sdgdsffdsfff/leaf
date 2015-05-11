@@ -87,4 +87,15 @@ $tab.on('click', 'a', function() {
     var $me = $(this);
     var type = $me.data('type');
     $showIframe.attr('src', showUrl[type]);
+
+    $tab.css({
+        'background-color' : '#1ab56e'
+    });
+
+    $('.display').css({
+        'top' : 60,
+        'height' : 'calc(100% - 60px)'
+    });
+
+
 });

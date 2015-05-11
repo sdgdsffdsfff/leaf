@@ -134,7 +134,12 @@ header .address li span{
   width: 100%;
   height: calc(100% - 450px);
   left: 0;
+
+  -webkit-transition:top 0.3s;
+  transition:top 0.3s;
+
 }
+
 
 .display .tab{
   height: 60px;
