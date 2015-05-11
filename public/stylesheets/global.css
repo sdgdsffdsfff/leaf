@@ -6,7 +6,7 @@
 }
 
 body{
-	font: 12px/1.5 "Microsoft YaHei","Hiragino Sans GB";
+	font: 12px "Microsoft YaHei","Hiragino Sans GB";
 	color: #333;
 }
 
@@ -28,4 +28,16 @@ h1,h2,h3,h4{
 
 a{
 	text-decoration: none;
+}
+
+b{
+	font-weight: normal;
+}
+
+@font-face {font-family: 'MoolBoran';
+    src: url('../fonts/MoolBoran.eot'); /* IE9*/
+    src: url('../fonts/MoolBoran.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/MoolBoran.woff') format('woff'), /* chrome、firefox */
+    url('../fonts/MoolBoran.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../fonts/MoolBoran.svg#MoolBoran') format('svg'); /* iOS 4.1- */
 }
