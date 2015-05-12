@@ -3,6 +3,8 @@
 node_modules
 /projects/
 
+window/
+
 #config file
 
 config.json
