@@ -5,6 +5,7 @@ var router = express.Router();
 var exec = require('child_process').exec;
 var Version = require('../db/version');
 var Project = require('../db/project');
+var nodeImages = require("images");
 
 var projectRootPath = path.resolve(__dirname, '../projects');
 var srcRootPath = path.resolve(__dirname, '../window');
@@ -109,11 +110,35 @@ router.post('/', function(req, res, next) {
 
         // console.log('命令=', cmdStr);
 
-        exec(cmdStr, function(err, stdout, stderr) {
+        exec(cmdStr, function (err, stdout, stderr) {
             if (err) {
                 console.error(stderr);
                 res.send('error');
             } else {
+                if (type === 'visual') {
+                    var _path = path.join(projectPath, 'visual');
+                    fs.exists(_path, function (exists) {
+                        if (!exists) {
+                            return;
+                        }
+                        var images = fs.readdirSync(_path);
+                        images = images.filter(function (el) {
+                            var extname = path.extname(el);
+                            return (extname === '.png' || extname === '.jpg' || extname === '.jpeg' || extname === '.gif')
+                        });
+
+                        images.map(function (el) {
+                            var imagePath = path.join(_path, el);
+                            var newName = path.basename(el, path.extname(el)) + '_min' + path.extname(el);
+                            nodeImages(imagePath)
+                                .size(500)
+                                .save(path.join(_path, newName));
+                            return el;
+                        });
+                    });
+                }
+
+
                 update(projectName,type, version, {
                     mapping: req.body.srcPath,
                     time: new Date()
