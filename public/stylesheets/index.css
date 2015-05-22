@@ -5,7 +5,7 @@ html,body{
 }
 
 header{
-	height: 848px;
+	height: 700px;
 	text-align: center;
 	background-color: #fff;
 	background-image: url('/images/header_bg.png');
@@ -24,7 +24,7 @@ header{
 header > img{
 	width: 139px;
 	height: 253px;
-	margin-top: 90px;
+	margin-top: 30px;
 }
 
 header h1{
@@ -33,7 +33,6 @@ header h1{
     font-size: 120px;
     font-weight: normal;
     line-height: 120px;
-    margin-top: 20px;
     -webkit-user-select:none;
     user-select:none;
 }
@@ -200,7 +199,7 @@ header .formBox .btns button.cancel{
 
 .content{
 	z-index: 250;
-	margin-top: 848px;
+	margin-top: 700px;
 	overflow: hidden;
 	background-color: #1ab56e;
 	position: absolute;
