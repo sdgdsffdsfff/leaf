@@ -7,6 +7,16 @@ YHD workflow tool, organize projects PRD，Prototype &amp; Visual.
 ```
   sudo mongod
 ```
+# 配置使用本地mongodb
+|
+|- config.json
+
+```
+{
+	"mongodb" : "mongodb://localhost:27017/leaf"
+}
+```
+
 # 启动Leaf
 ```
   ./bin/www
