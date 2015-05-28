@@ -63,7 +63,7 @@ router.post('/', function (req, res, next) {
         }
 
         var mountCmdStr = 'sudo mount -t cifs -o username=liubing2,password=test1064=,ro ' + srcPath + ' ' + srcRootPath;
-        var unmountCmdStr = 'sudo unmount ' + srcRootPath;
+        var unmountCmdStr = 'sudo umount ' + srcRootPath;
 
 
         exec(unmountCmdStr);
