@@ -53,98 +53,111 @@ router.post('/', function (req, res, next) {
         //是否需要恢复文件目录？
 
 
-        console.log(srcPath, srcRootPath);
+        var srcPathArr = srcPath.split(':');
 
+        if (srcPathArr.length > 0) {
+            srcPath = srcPathArr[1];
+        } else {
+            res.send('error');
+            return;
+        }
 
-        var mountCmdStr = 'echo liubing | sudo mount -t cifs -o username=liubing2,password=test1064=,ro ' + srcPath + ' ' + srcRootPath;
+        var mountCmdStr = 'sudo mount -t cifs -o username=liubing2,password=test1064=,ro ' + srcPath + ' ' + srcRootPath;
+        var unmountCmdStr = 'sudo unmount ' + srcRootPath;
 
         // console.log('命令=', cmdStr);
 
         exec(mountCmdStr, function (err, stdout, stderr) {
             if (err) {
-                console.error(stderr);
+                console.error('err', stderr);
+                res.send('error');
                 return;
             } else {
-                console.log(stdout);
+                console.log('ok', stdout);
+                copy();
                 return;
             }
         });
 
         // console.log('源目录=', srcPath);
 
-
-        if (!fs.existsSync(srcPath)) {
-            res.send('error');
-            return;
-        }
-
-
-        var file = fs.statSync(srcPath);
-
-        if (file.isDirectory()) {
-            srcPath = path.join(srcPath, '*');
-        }
+        //
+        //if (!fs.existsSync(srcPath)) {
+        //    res.send('error');
+        //    return;
+        //}
+        //
+        //
+        //var file = fs.statSync(srcPath);
+        //
+        //if (file.isDirectory()) {
+        //    srcPath = path.join(srcPath, '*');
+        //}
 
         // console.log('处理后=', srcPath)
         //copy
-        var projectPath = path.join(projectRootPath, projectName, version);
 
-        var isExists = fs.existsSync(projectPath);
+        function copy() {
+            var projectPath = path.join(projectRootPath, projectName, version);
 
-        if (!isExists) {
-            fs.mkdirSync(projectPath);
-            fs.mkdirSync(path.join(projectPath, 'prd'));
-            fs.mkdirSync(path.join(projectPath, 'prototype'));
-            fs.mkdirSync(path.join(projectPath, 'visual'));
-        }
+            var isExists = fs.existsSync(projectPath);
 
-        if (!fs.existsSync(path.join(projectPath, 'prd'))) {
-            fs.mkdirSync(path.join(projectPath, 'prd'));
-        }
-
-
-        var cmdStr = 'cp -R ' + srcPath + ' ' + projectPath + path.sep + type + path.sep;
-
-        // console.log('命令=', cmdStr);
-
-        exec(cmdStr, function (err, stdout, stderr) {
-            if (err) {
-                console.error(stderr);
-                res.send('error');
-            } else {
-                if (type === 'visual') {
-                    var _path = path.join(projectPath, 'visual');
-                    fs.exists(_path, function (exists) {
-                        if (!exists) {
-                            return;
-                        }
-                        var images = fs.readdirSync(_path);
-                        images = images.filter(function (el) {
-                            var extname = path.extname(el);
-                            return (extname === '.png' || extname === '.jpg' || extname === '.jpeg' || extname === '.gif')
-                        });
-
-                        images.map(function (el) {
-                            var imagePath = path.join(_path, el);
-                            var newName = path.basename(el, path.extname(el)) + '_min' + path.extname(el);
-                            nodeImages(imagePath)
-                                .size(500)
-                                .save(path.join(_path, newName));
-                            return el;
-                        });
-                    });
-                }
-
-
-                update(projectName, type, version, {
-                    mapping: req.body.srcPath,
-                    time: new Date()
-                }, function (err, ver) {
-                    res.send('同步成功！');
-                });
-
+            if (!isExists) {
+                fs.mkdirSync(projectPath);
+                fs.mkdirSync(path.join(projectPath, 'prd'));
+                fs.mkdirSync(path.join(projectPath, 'prototype'));
+                fs.mkdirSync(path.join(projectPath, 'visual'));
             }
-        });
+
+            if (!fs.existsSync(path.join(projectPath, 'prd'))) {
+                fs.mkdirSync(path.join(projectPath, 'prd'));
+            }
+
+
+            var cmdStr = 'cp -R ' + srcRootPath + ' ' + projectPath + path.sep + type + path.sep;
+
+            // console.log('命令=', cmdStr);
+
+            exec(cmdStr, function (err, stdout, stderr) {
+                if (err) {
+                    console.error(stderr);
+                    res.send('error');
+                    exec(unmountCmdStr);
+                } else {
+                    if (type === 'visual') {
+                        var _path = path.join(projectPath, 'visual');
+                        fs.exists(_path, function (exists) {
+                            if (!exists) {
+                                return;
+                            }
+                            var images = fs.readdirSync(_path);
+                            images = images.filter(function (el) {
+                                var extname = path.extname(el);
+                                return (extname === '.png' || extname === '.jpg' || extname === '.jpeg' || extname === '.gif')
+                            });
+
+                            images.map(function (el) {
+                                var imagePath = path.join(_path, el);
+                                var newName = path.basename(el, path.extname(el)) + '_min' + path.extname(el);
+                                nodeImages(imagePath)
+                                    .size(500)
+                                    .save(path.join(_path, newName));
+                                return el;
+                            });
+                        });
+                    }
+
+                    exec(unmountCmdStr);
+                    update(projectName, type, version, {
+                        mapping: req.body.srcPath,
+                        time: new Date()
+                    }, function (err, ver) {
+                        res.send('同步成功！');
+                    });
+
+                }
+            });
+        }
 
     } catch (e) {
         console.error(e);
