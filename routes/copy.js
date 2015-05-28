@@ -116,7 +116,7 @@ router.post('/', function (req, res, next) {
             }
 
 
-            var cmdStr = 'cp -R ' + srcRootPath + ' ' + projectPath + path.sep + type + path.sep;
+            var cmdStr = 'cp -R ' + srcRootPath + path.sep + '*' + ' ' + projectPath + path.sep + type + path.sep;
 
             // console.log('命令=', cmdStr);
 
