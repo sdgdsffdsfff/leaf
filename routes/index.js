@@ -193,7 +193,7 @@ router.get('/:project/:version/visual', function(req, res, next) {
         var data = {
             title: "visual",
             images: images
-        }
+        };
 
         res.render('visual', data);
 

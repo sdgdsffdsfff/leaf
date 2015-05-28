@@ -11,15 +11,13 @@ var projectRootPath = path.resolve(__dirname, '../projects');
 var srcRootPath = path.resolve(__dirname, '../window');
 
 
-
-
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
 });
 
 
-function update(projectName,type, version, newContent, cb) {
+function update(projectName, type, version, newContent, cb) {
 
     switch (type) {
         case 'prd':
@@ -33,17 +31,17 @@ function update(projectName,type, version, newContent, cb) {
             break;
     }
 
-    Project.findByName(projectName, function(err, obj) {
-            if (obj) {
-                obj.updateTime = new Date();
-                obj.save();
-            }
+    Project.findByName(projectName, function (err, obj) {
+        if (obj) {
+            obj.updateTime = new Date();
+            obj.save();
+        }
     });
 }
 
 
 /* GET users listing. */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
     try {
         var projectName = req.body.projectName;
         var version = req.body.version;
@@ -51,29 +49,28 @@ router.post('/', function(req, res, next) {
         var srcPath = req.body.srcPath;
 
 
-
         //TDTO 处理数据库逻辑
         //是否需要恢复文件目录？
 
 
-        function findPath(srcPath) {
-            var realPath = srcPath;
-            if (srcPath.split('CrossShare/').length > 1) {
-                realPath = srcPath.split('CrossShare/')[1];
+        console.log(srcPath, srcRootPath);
+
+
+        var mountCmdStr = 'echo liubing | sudo mount -t cifs -o username=liubing2,password=test1064=,ro ' + srcPath + ' ' + srcRootPath;
+
+        // console.log('命令=', cmdStr);
+
+        exec(mountCmdStr, function (err, stdout, stderr) {
+            if (err) {
+                console.error(stderr);
+                return;
+            } else {
+                console.log(stdout);
+                return;
             }
-            return realPath;
-        }
-
-
-
-        srcPath = findPath(srcPath);
+        });
 
         // console.log('源目录=', srcPath);
-
-
-
-        //TODO
-        srcPath = path.join(srcRootPath, srcPath)
 
 
         if (!fs.existsSync(srcPath)) {
@@ -139,10 +136,10 @@ router.post('/', function(req, res, next) {
                 }
 
 
-                update(projectName,type, version, {
+                update(projectName, type, version, {
                     mapping: req.body.srcPath,
                     time: new Date()
-                }, function(err, ver) {
+                }, function (err, ver) {
                     res.send('同步成功！');
                 });
 
@@ -153,7 +150,6 @@ router.post('/', function(req, res, next) {
         console.error(e);
         res.send('error');
     }
-
 
 
 });

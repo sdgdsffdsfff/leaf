@@ -7,7 +7,6 @@ var Version = require('../db/version');
 
 
 var projectRootPath = path.resolve(__dirname, '../projects');
-var srcRootPath = path.resolve(__dirname, '../window');
 
 
 
