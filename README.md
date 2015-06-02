@@ -5,9 +5,9 @@ YHD workflow tool, organize projects PRD，Prototype &amp; Visual.
 - projects 对应的项目存储目录
 
 # install Mongodb
-```
-  sudo mongod
-```
+
+http://docs.mongodb.org/manual/administration/install-on-linux/
+
 # 配置使用本地mongodb
 |
 |- config.json
